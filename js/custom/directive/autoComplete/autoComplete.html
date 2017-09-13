@@ -1,0 +1,32 @@
+<div class="form-group" data-ng-class="{'has-error':  (obrigatorio === true || obrigatorio === 'true') && (form[id].$error.required || !identificador) && (!form[id].$pristine || form.$submitted) }">
+
+	<label for="{{id}}" data-ng-class="{'obrigatorio' : obrigatorio}" data-ng-if='labelRender'>
+        <translate>{{label}}</translate>
+        <span>:</span>
+		<i data-ng-if='labelInfoTooltipRender' class='glyphicon glyphicon-info-sign' uib-tooltip='{{labelInfoTooltip}}'
+		   tooltip-placement='top'></i>
+	</label>
+
+	<div id="{{id}}" class="input-group">
+		<input autocomplete="off" class="form-control bordaLaranja" type="text" id="typeahead-{{id}}" name="{{id}}"
+			   data-ng-model="model" typeahead-min-length="minLength ? minLength : 1" data-ng-disabled='disabled'
+			   data-ng-required="obrigatorio === true || obrigatorio === 'true'"
+               uib-typeahead="item as labelTypeahead(item) for item in findResult($viewValue) | limitTo:10"
+			   typeahead-on-select="setResultItem($item)" data-rel="tooltip"
+			   title="{{DIGITE_AUTOCOMPLETE | translate}}" data-ng-blur="limparCampoSemModel()"
+			   data-ng-keydown="removeModel($event)"/>
+
+		<span class="input-group-btn">
+            <button type="button" class="btn btn-default bordaLaranja">
+				<i class="fa fa-search bigger-110"></i>
+			</button>
+            <button ng-if="!disabled" type="button" class="btn btn-default bordaLaranja"
+					data-ng-click="limparCampo(); acaoBorracha();"
+					ng-class="{'hover-directive' : (($hover == true) && !disabled)}" ng-mouseover="$hover = true"
+					ng-mouseout="$hover = false">
+				<i class="glyphicon glyphicon-erase"></i>
+			</button>
+		</span>
+
+	</div>
+</div>

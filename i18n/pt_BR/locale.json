@@ -1,0 +1,38 @@
+{
+	"LABEL":{
+		"ADICIONAR": "Adicionar",
+		"CANCELAR":"Cancelar",
+		"CONFIRMAR":"Confirmar",
+		"FECHAR":"Fechar",
+		"LIMPAR":"Limpar",
+		"NOVO": "Novo",
+		"PESQUISAR":"Pesquisar",
+		"SALVAR": "Salvar",
+		"VOLTAR": "Voltar"
+	},
+	
+	"VALIDACAO":{
+		"MENSAGEM_M002":" Campo(s) obrigatório(s) não preenchido(s)!",
+		"MENSAGEM_M004":" inválido(a)!",
+		"MENSAGEM_M004_PROCEDIMENTO":" Informar um(a) ",
+		"MENSAGEM_M004_CAMPOS":" válido(a).",
+		"MENSAGEM_CAMPO_OBRIGATORIO":" Campo de preenchimento obrigatório",
+		"MENSAGEM_NENHUM_REGISTRO_ENCONTRADO":" Nenhum registro encontrado para esta pesquisa. Informar outros parâmetros de pesquisa.",
+		"MENSAGEM_GESTOR_OBRIGATORIO": "Nenhum(a) gestor(a) do contrato/convênio foi informado(a). Incluir pelo menos um(a) gestor(a) no contrato/convênio.",
+		"MENSAGEM_GESTOR_JA_VINCULADO": "Gestor(a) já vinculado(a) ao Contrato/Convênio.",
+		"MENSAGEM_GESTOR_NAO_ENCONTRADO": "O CPF do(a) gestor(a) informado não pertence a um usuário do sistema.",
+		"MENSAGEM_DATA_FINAL_MAIOR_QUE_DATA_INICIAL":"Data Inicial maior que Data Final. Informe uma Data Inicial menor ou igual a Data Final.",
+		"MENSAGEM_CARACTERES_MINIMOS": "Informe pelo menos 2 caracteres no(s) filtro(s) para efetuar a pesquisa.",
+		"MENSAGEM_MAXIMO_GESTOR": "Somente é possível adicionar 3 gestores por contrato."
+	},
+	
+	"MSG":{
+		"MENSAGEM_ERROR":" Ocorreu algum erro Inesperado, entre em contato com o administrador do sistema:",
+		"MENSAGEM_M001":" Dados salvos com sucesso!",
+		"MENSAGEM_M006":" Falha na conexão com o banco de dados. Entrar em contato com o administrador do sistema.",
+		"MENSAGEM_M007":" Falha na conexão com a Intranet. Entrar em contato com o administrador do sistema.",
+		"MENSAGEM_M008":" Falha na conexão com a internet. Entrar em contato com o administrador do sistema.",
+		"MENSAGEM_M009":" Falha na conexão com sistemas externos. Entrar em contato com o administrador do sistema.",
+		"MENSAGEM_M010":" Deseja excluir esse registro?"
+	}
+}

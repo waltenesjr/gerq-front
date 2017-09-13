@@ -1,0 +1,14 @@
+<div ng-class="{'has-error': (form[id].$error.required || form[id].$error.regexValidate) && (!form[id].$pristine || form.$submitted)}"\>
+    <label for="{{id}}" data-ng-class="{'obrigatorio' : obrigatorio}" ng-if="labelRender">
+        <translate>{{label}}</translate>
+        <!--<i ng-if="obrigatorio" ng-show="form[id].$error.required && (!form[id].$pristine || form.$submitted)" class='fa fa-warning red' uib-tooltip="{{labelAlertTooltipCopy}}" tooltip-placement="top"></i>-->
+        <i ng-if="validacaoRegex" ng-show="form[id].$error.regexValidate && (!form[id].$pristine || form.$submitted)" class="fa fa-warning red" uib-tooltip="{{invalidRegex}}" tooltip-placement="top"></i>
+        <i ng-show="form[id].$error.email && (!form[id].$pristine || form.$pristine)" class="fa fa-warning red" uib-tooltip="{{invalidEmailTooltip}}" tooltip-placement="top"></i>
+        <i ng-if="labelInfoTooltipRender" class="fa fa-info-circle blue" uib-tooltip="{{labelInfoTooltipMsg}}" tooltip-placement="top"></i>
+        <!--<i ng-if='labelQuestionTooltipRender' class='fa fa-question-circle green' uib-tooltip='{{labelQuestionTooltip}}' tooltip-placement='top'></i>-->
+    </label>
+ 	<input type="{{type}}" ng-trim="{{trim}}" regex-validate="{{regex}}" ng-blur="validarEmail($event); eventoBlur();"
+           ng-change="eventoChange()" class="form-control" id="{{id}}" maxlength="{{maxlength ? maxlength : 255}}"
+           name="{{id}}" ng-model="model" ui-mask="{{mask}}" ng-disabled="disabled" ng-required="obrigatorio"
+           placeholder="{{placeholder}}"/>
+</div>

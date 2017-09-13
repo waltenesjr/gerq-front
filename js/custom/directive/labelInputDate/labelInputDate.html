@@ -1,0 +1,22 @@
+<div data-ng-class="{'has-error': form[id].$error.required && (!form[id].$pristine || form.$submitted) || removeInternalControl.dataInvalida}">
+	<label for="{{id}}" data-ng-class="{'obrigatorio' : obrigatorio}" data-ng-if='labelRender'>
+		<translate>{{label}}</translate><span>:</span>
+		<i data-ng-if="labelInfoTooltipRender" class="glyphicon glyphicon-info-sign" uib-tooltip="{{labelInfoTooltip}}" tooltip-placement="top"></i> 
+		<!-- <i data-ng-if="labelQuestionTooltipRender" class="glyphicon glyphicon-question-sign" ui-tooltip="{{labelQuestionTooltip}}" tooltip-placement="top"></i> -->
+	</label>
+	<div class="input-group">
+		<input class="form-control bordaLaranja" id="{{id}}" name="{{id}}" type="text" data-ng-model="model" data-ng-disabled="disabled" data-ng-required="obrigatorio"
+			data-ng-change="eventoChange();" data-ng-keyup="formataDataAoDigitar($event);" data-ng-keydown="formataDataAoDigitar($event);" data-ng-blur="formataDataAoDesfocar($event)"  
+			uib-datepicker-popup="{{datePickerFormat}}" datepicker-options="datePickerOptions" is-open="opened" min-date="minDate" max-date="maxDate" focus-me="focusOn"
+			close-text="{{'LABEL.FECHAR' | translate}}" current-text="{{'LABEL.HOJE' | translate}}" clear-text="{{'LABEL.LIMPAR' | translate}}"/>
+			
+		<span class="input-group-btn has-error">
+			<button type="button" class="btn btn-default bordaLaranja" data-ng-disabled="disabled" data-ng-click="datePickerOpen($event);">
+				<i class="glyphicon glyphicon-calendar"></i>
+			</button>
+			<button type="button" class="btn btn-default bordaLaranja" data-ng-disabled="disabled" data-ng-click="limparModel()">
+				<i class="glyphicon glyphicon-erase"></i>
+			</button>
+		</span>
+	</div>
+</div>

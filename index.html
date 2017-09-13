@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-ng-app="app">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>GERQ - Gerenciamento de Produtos Químicos</title>
+
+        <!--CSS-->
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+        <link type="text/css" rel="stylesheet" href="css/app.css">
+        <link type="text/css" rel="stylesheet" href="node_modules/angular-block-ui/dist/angular-block-ui.min.css">
+        <link type="text/css" rel="stylesheet" href="node_modules/angular-toastr/dist/angular-toastr.min.css">
+        <link type="text/css" rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+
+        <!--js de terceiros-->
+        <script type="text/javascript" src="node_modules/moment/moment.js"></script>
+        <script type="text/javascript" src="node_modules/moment/locale/pt-br.js"></script>
+        <script type="text/javascript" src="node_modules/lodash/lodash.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-animate/angular-animate.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-resource/angular-resource.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-i18n/angular-locale_pt-br.js"></script>
+        <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+        <script type="text/javascript" src="node_modules/angular-ui-mask/dist/mask.min.js"></script>
+        <script type="text/javascript" src="node_modules/restangular/dist/restangular.js"></script>
+        <script type="text/javascript" src="node_modules/angular-block-ui/dist/angular-block-ui.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-moment/angular-moment.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-file-upload/dist/angular-file-upload.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-bootstrap-checkbox/angular-bootstrap-checkbox.js"></script>
+        <script type="text/javascript" src="node_modules/angular-translate/dist/angular-translate.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-translate/dist/angular-translate-loader-partial/angular-translate-loader-partial.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-translate/dist/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-br-filters/release/angular-br-filters.min.js"></script>
+        <script type="text/javascript" src="node_modules/angular-input-masks/releases/angular-input-masks-standalone.min.js"></script>
+        <script type="text/javascript" src="node_modules/bootstrap-ui-datetime-picker/dist/datetime-picker.min.js"></script>
+
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/appConfig.js"></script>
+        <script type="text/javascript" src="js/appRun.js"></script>
+        <script type="text/javascript" src="js/uiRouterConfig.js"></script>
+        <script type="text/javascript" src="js/restangularConfig.js"></script>
+        <script type="text/javascript" src="js/function/function.js"></script>
+        <script type="text/javascript" src="js/controller/AppController.js"></script>
+
+        <!--controller-->
+        <script src="js/custom/controller/CategoriaController.js"></script>
+
+        <!--service-->
+        <script type="text/javascript" src="js/custom/service/TranslateAsyncLoader.js"></script>
+        <script type="text/javascript" src="js/custom/service/TranslateService.js"></script>
+        <script type="text/javascript" src="js/custom/service/CategoriaService.js"></script>
+
+        <!--repository-->
+        <script type="text/javascript" src="js/custom/repository/AbstractRepository.js"></script>
+        <script type="text/javascript" src="js/custom/repository/TranslateRepository.js"></script>
+        <script type="text/javascript" src="js/custom/repository/CategoriaRepository.js"></script>
+
+        <!--directivas-->
+        <script type="text/javascript" src="js/custom/directive/footer/Footer.js"></script>
+        <script type="text/javascript" src="js/custom/directive/focus/FocusMe.js"></script>
+        <script type="text/javascript" src="js/custom/directive/integer/IntegerDirective.js"></script>
+        <script type="text/javascript" src="js/custom/directive/labelInputDate/LabelInputDateDirective.js"></script>
+        <script type="text/javascript" src="js/custom/directive/autoComplete/AutoCompleteDirective.js"></script>
+        <script type="text/javascript" src="js/custom/directive/labelSelect/LabelSelectDirective.js"></script>
+        <script type="text/javascript" src="js/custom/directive/associarDocumentos/AssociarDocumentosDirective.js"></script>
+        <script type="text/javascript" src="js/custom/directive/labelInputTime/LabelInputTimeDirective.js"></script>
+    </head>
+
+    <body id="gerqnapp-controller" data-ng-controller="AppController">
+        <div class="container-fluid">
+            <!-- Mensagens -->
+            <br>
+            <div growl reference="1"></div>
+        </div>
+
+        <div ui-view></div>
+
+        <!--dialog confirmacao-->
+        <script type="text/ng-template" id="dialogTemplateConfimacao.html">
+            <div ng-include src="'dialog/dialogTemplateConfimacao.html'" />
+        </script>
+
+        <!--dialog help-->
+        <script type="text/ng-template" id="dialogTemplateHelp.html">
+            <div ng-include src="'dialog/dialogTemplateHelp.html'" />
+        </script>
+    </body>
+</html>

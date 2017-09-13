@@ -1,0 +1,40 @@
+{
+  "name": "gerq",
+  "version": "1.0.0",
+  "description": "Gerenciamento de Produtos Químicos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "arq",
+    "angular"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "1.6.1",
+    "angular-animate": "1.6.1",
+    "angular-block-ui": "0.2.2",
+    "angular-bootstrap-checkbox": "1.0.0",
+    "angular-br-filters": "0.7.0",
+    "angular-file-upload": "2.4.1",
+    "angular-i18n": "1.6.1",
+    "angular-input-masks": "2.5.0",
+    "angular-moment": "1.0.1",
+    "angular-resource": "1.6.1",
+    "angular-sanitize": "1.6.1",
+    "angular-toastr": "2.1.1",
+    "angular-translate": "2.13.1",
+    "angular-ui-bootstrap": "2.4.0",
+    "angular-ui-mask": "1.8.7",
+    "angular-ui-router": "0.3.2",
+    "bootstrap": "3.3.7",
+    "bootstrap-ui-datetime-picker": "2.5.4",
+    "font-awesome": "4.7.0",
+    "jquery": "3.1.1",
+    "moment": "2.17.1",
+    "oclazyload": "1.0.9",
+    "restangular": "1.5.2"
+  }
+}

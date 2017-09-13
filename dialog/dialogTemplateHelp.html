@@ -1,0 +1,44 @@
+<div class="modal-header text-center">
+	<h3 class="modal-title">{{$parent.modalHelpInfo.title}}</h3>
+</div><!-- .modal-header -->
+
+<div class="modal-body">
+	<div>
+		<p>
+			<b>{{'LABEL.FUNCIONALIDADE' | translate}}<span>:</span></b> {{$parent.modalHelpInfo.funcionalidade}}
+		</p>
+	</div>
+
+	<div>
+		<p>
+			<b>{{'LABEL.OBJETIVO' | translate}}<span>:</span></b> {{$parent.modalHelpInfo.objetivo}}
+		</p>
+	</div>
+
+	<div ng-if="$parent.modalHelpInfo.camposPrincipais.length > 0">
+		<p>
+			<b>{{'LABEL.PRINCIPAIS_CAMPOS' | translate}}<span>:</span></b>
+			<ol>
+				<li ng-repeat="campo in $parent.modalHelpInfo.camposPrincipais">
+		<p>
+			<b><ins>{{campo.nome}}<span>:</span></ins></b> {{campo.descricao}}
+		</p>
+		<p ng-if="campo.importante">
+			{{campo.importante}}
+		</p>
+		</li>
+		</ol>
+		</p>
+	</div>
+
+	<div>
+		<p>{{$parent.modalHelpInfo.paragrafoPadraoOne}}</p>
+	</div>
+	<div>
+		<p>{{$parent.modalHelpInfo.paragrafoPadraoTwo}}</p>
+	</div>
+</div><!-- .modal-body -->
+
+<div class="modal-footer">
+	<button class="btn btn-warning" type="button" ng-click="$dismiss('cancel');">{{'LABEL.ENTENDI' | translate}}</button>
+</div><!-- .modal-footer -->

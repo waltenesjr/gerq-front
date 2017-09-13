@@ -1,0 +1,102 @@
+<form name="formDialogDocumentos" novalidade autocomplete="off">
+
+	<div class="modal-header">
+        <h3 class="modal-title">
+            <translate>LABEL.DOCUMENTO</translate>
+        </h3>
+	</div>
+
+	<div class="modal-body">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <label-select ng-id="documento.tipoDocumento.id"
+                    ng-model="documento.tipoDocumento.id" ng-label="LABEL.TIPO_DOCUMENTO" ng-obrigatorio="true"
+                    ng-disabled="!editDocumento" form="formDialogDocumentos" ng-list="tiposDocumento"
+                    ng-custom-options="tipoDocumento.id as tipoDocumento.descricao for tipoDocumento">
+                </label-select>
+            </div>
+        </div>
+
+        </br>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <fieldset>
+                    <legend>
+                        <label>
+                            <translate>LABEL.ARQUIVO</translate>
+                        </label>
+                    </legend>
+
+                    <input ng-hide="true" id="uploadArquivos" type="file" nv-file-select="" uploader="uploader"
+                           options="{clearInputAfterAddedToQueue: true}"/>
+
+                    <div class="col-sm-12" ng-show="editDocumento && (uploader.queue < 1)">
+                        <div nv-file-drop="" uploader="uploader" id="actionUploadArquivos"
+                             data-ng-click="acionarInputFile('uploadArquivos');">
+                            <div nv-file-over="" uploader="uploader" over-class="another-file-over-class">
+                                <label class="file-input file-multiple">
+                                    <span class="file-container">
+                                        <label class="uploadMsg">
+                                            <translate>LABEL.UPLOAD_MSG_ARRASTE</translate>
+                                        </label>
+                                        <span class="file-name" data-title="...">
+                                            <i class="icon fa fa-cloud-upload"></i>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" ng-show="uploader.queue.length > 0">
+                        <div class="col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading clearfix">
+                                    <button class="btn btn-primary" type="button" ng-hide="!editDocumento"
+                                            ng-click="removerAnexo();">
+                                        <i class="fa fa-times red"></i>
+                                        <translate>LABEL.REMOVER</translate>
+                                    </button>
+                                </div>
+                                <!-- .panel-heading -->
+                                <table class="table table-striped table-bordered table-hover" >
+                                    <thead>
+                                        <tr>
+                                            <th width="70%"><translate>LABEL.NOME</translate></th>
+                                            <th ng-show="uploader.isHTML5"><translate>LABEL.TAMANHO</translate></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in uploader.queue">
+                                            <td>
+                                                <strong>{{ item.file.name }}</strong>
+                                            </td>
+                                            <td style="text-align: right;" ng-show="uploader.isHTML5" nowrap>
+                                                {{ item.file.size/1024/1024|number:2 }} MB
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- .col -->
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+	</div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="$dismiss('cancel');">
+            <i class="fa fa-times red"></i>
+            <translate>LABEL.FECHAR</translate>
+        </button>
+        <button class="btn btn-primary" type="button" ng-show="editDocumento"
+                ng-click="salvarAdicionarDocumento(formDialogDocumentos)">
+            <i class="glyphicon glyphicon-ok"></i>
+            <translate>LABEL.INCLUIR</translate>
+        </button>
+    </div>
+</form>

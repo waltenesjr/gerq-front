@@ -1,0 +1,24 @@
+<div data-ng-class="{'has-error': form[id].$error.required && (!form[id].$pristine || form.$submitted)}">
+
+    <label for="{{id}}" data-ng-class="{'obrigatorio' : obrigatorio}" data-ng-if='labelRender'>
+        <translate>{{label}}</translate><span>:</span>
+        <i data-ng-if="labelInfoTooltipRender" class="glyphicon glyphicon-info-sign"
+           uib-tooltip="{{labelInfoTooltip}}" tooltip-placement="top"></i>
+    </label>
+
+    <div class="input-group">
+        <input id="{{id}}" name="{{id}}" data-ng-readonly="true" type="text" class="form-control" enable-date="false"
+               ng-click="openTimePicker($event)" datetime-picker="HH:mm" ng-model="modelTemp" is-open="opened"
+               ng-focus="openTimePicker($event)" timepicker-options="timepickerOptions" data-ng-required="obrigatorio"
+               close-on-selection="true"/>
+
+        <span class="input-group-btn has-error">
+            <button type="button" class="btn btn-default" data-ng-disabled="disabled" ng-click="openTimePicker($event)">
+                <i class="fa fa-clock-o"></i>
+            </button>
+            <button type="button" class="btn btn-default" data-ng-disabled="disabled" ng-click="limparModel()">
+                <i class="glyphicon glyphicon-erase"></i>
+            </button>
+        </span>
+    </div>
+</div>
