@@ -70,6 +70,7 @@
     "DATA_FINAL": "Data Final",
     "EMAIL_INVALIDO": "E-mail inválido"
   },
+
   "VALIDACAO": {
     "MENSAGEM_M002": "Campo(s) obrigatório(s) não preenchido(s)!",
     "MENSAGEM_M004": "inválido(a)!",
@@ -79,10 +80,12 @@
     "MENSAGEM_M006": "Nenhum registro encontrado para esta pesquisa. Informar outros parâmetros de pesquisa.",
     "MENSAGEM_M0012": "Nenhum documento foi adicionado. Incluir pelo menos um documento."
   },
+
   "MSG": {
     "POPUP_BLOQUEADA_BOLETO": "Popup bloqueada! Para visualizar o boleto, altere as configurações do seu navegador.",
     "MENSAGEM_ERROR": "Ocorreu algum erro Inesperado, entre em contato com o administrador do sistema:",
     "MENSAGEM_M001": "Dados salvos com sucesso!",
+    "MENSAGEM_M012": "Dados alterados com sucesso!",
     "MENSAGEM_M007": "Falha na conexão com a Intranet. Entrar em contato com o administrador do sistema.",
     "MENSAGEM_M010": "Deseja realmente efetuar esta operação?",
     "MENSAGEM_M011": "Registro excluído com sucesso!",
@@ -94,6 +97,7 @@
     "SELECIONE_ARQUIVO_FORMATO": "Selecione um arquivo que esteja entre o(s) formato(s): ",
     "SELECIONE_ARQUIVO_TAMANHO": "Não é possível submeter um arquivo com mais de "
   },
+
   "HELP": {
   }
 }

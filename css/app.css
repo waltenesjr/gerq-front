@@ -1,18 +1,55 @@
-/* All styles created for demo purposes only, you may not need this for your project */
-.demo-button button {
-    margin-bottom: 5px; }
+label {
+    color: #337ab7;
+}
 
-.demo-icons li {
-    margin-bottom: 50px;
-    text-align: center; }
+.modal-header {
+    background-color: #337ab7;
+    color: white;
+}
 
-.demo-icons .lnr,
-.demo-icons .fa {
-    font-size: 28px; }
+.table > thead > tr > th {
+    background-color: #337ab7 !important;
+    color: white !important;
+}
 
-.demo-icons .cssclass {
-    display: block;
-    margin-top: 5px;
-    margin-left: 5px; }
+.panel-body {
+    padding: 25px !important;
+}
 
-/*# sourceMappingURL=demo.css.map */
+.navbar-inverse {
+    background-color: #337ab7 !important;
+    border-color: #337ab7 !important;
+}
+
+.navbar-nav {
+    background-color: #337ab7 !important;
+    border-color: #337ab7 !important;
+}
+
+.navbar-brand {
+    color: white !important;
+    font-size: 20px !important;
+}
+
+.navbar-brand strong {
+    font-size: 25px !important;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover {
+    background-color: white !important;
+    color: #337ab7 !important;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: white !important;
+}
+
+.dropdown-menu > li > a {
+    color: #337ab7 !important;
+}
+
+/* Posição da mensagem */
+.toast-top-right {
+    top: 65px !important;
+    right: 12px;
+}

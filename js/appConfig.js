@@ -9,7 +9,7 @@ angular.module('app').config(['$translateProvider', '$httpProvider', 'blockUICon
         blockUIConfig.delay = 100;
         blockUIConfig.template = '<div class=\"block-ui-overlay\"></div><div class=\"block-ui-message-container\" ' +
             'aria-live=\"assertive\" aria-atomic=\"true\"><div class=\"block-ui-message\" ' +
-            'ng-class=\"$_blockUiMessageClass\"><img src="node_modules/arq-front/img/loadBlock.gif"> ' +
+            'ng-class=\"$_blockUiMessageClass\"><img src="/gerq-front/img/loadBlock.gif"> ' +
             '{{ state.message }}</div></div>';
         //###################### FIM DA CONFIGURACAO DO BLOQUEIO DA INTERFACE ######################
 
@@ -19,7 +19,7 @@ angular.module('app').config(['$translateProvider', '$httpProvider', 'blockUICon
             allowHtml: false,
             closeButton: true,
             closeHtml: '<button>&times;</button>',
-            extendedTimeOut: 1000,
+            extendedTimeOut: 400,
             iconClasses: {
                 error: 'toast-error',
                 info: 'toast-info',

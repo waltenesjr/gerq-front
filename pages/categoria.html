@@ -1,18 +1,61 @@
-<div class="container">
-    <h1 class="page-header">Categoria</h1>
-
-    <form>
-        <div class="form-group">
-            <label for="descricao">Descrição:</label>
-            <input type="text" class="form-control input-lg" id="descricao" placeholder="Descrição">
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h2 class="panel-title"><strong>{{'CATEGORIA.CATEGORIA' | translate}}</strong></h2>
+    </div>
+    <div class="panel-body">
+        <form name="categoriaForm">
+            <div class="form-group form-group-lg">
+                <label for="descricao">{{'CATEGORIA.DESCRICAO' | translate}}</label>
+                <div class="input-group">
+                    <input
+                        ng-model="categoria.descricao"
+                        class="form-control"
+                        id="descricao"
+                        name="descricao"
+                        required>
+                    <span class="input-group-btn">
+                        <button ng-if="status == 'home'" ng-click="addCategoria()" class="btn btn-primary btn-lg">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </button>
+                        <button ng-if="status == 'home'" class="btn btn-primary btn-lg">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+                        <button ng-if="status == 'edit'" ng-click="confirmEdit()" class="btn btn-primary btn-lg">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        </button>
+                        <a ng-if="status == 'edit'" ng-click="limpar()" class="btn btn-primary btn-lg">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </form><br>
+        <div ng-if="categorias.length > 0">
+            <label><strong>{{'CATEGORIA.CATEGORIAS' | translate}}</strong></label>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>{{'CATEGORIA.CODIGO' | translate}}</th>
+                        <th>{{'CATEGORIA.DESCRICAO' | translate}}</th>
+                        <th>{{'LABEL.ACOES' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="categoria in categorias">
+                        <td width="5%">{{ categoria.id }}</td>
+                        <td>{{ categoria.descricao }}</td>
+                        <td width="10%" class="text-center">
+                            <button class="btn btn-primary" ng-click="edit(categoria)">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            </button>
+                            <button class="btn btn-primary" ng-click="excluir(categoria.id)">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div style="text-align: right;">
-            <button type="submit" class="btn btn-primary btn-lg">Incluir</button>
-            <button type="submit" class="btn btn-default btn-lg">Pesquisar</button>
-        </div>
-    </form>
-
-
+    </div>
 </div>
-
 

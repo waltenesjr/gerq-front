@@ -9,14 +9,15 @@
 
         <title>GERQ - Gerenciamento de Produtos Químicos</title>
 
+        <link type="image/png" rel="icon" href="img/ico.png"/>
+        <link rel="shortcut" href="img/ico.png">
+
         <!--CSS-->
         <link type="text/css" rel="stylesheet" href="css/app.css">
         <link type="text/css" rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
         <link type="text/css" rel="stylesheet" href="node_modules/angular-block-ui/dist/angular-block-ui.min.css">
         <link type="text/css" rel="stylesheet" href="node_modules/angular-toastr/dist/angular-toastr.min.css">
         <link type="text/css" rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
-
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700">
 
         <!--js de terceiros-->
         <script type="text/javascript" src="node_modules/moment/moment.js"></script>
@@ -27,12 +28,12 @@
         <script type="text/javascript" src="node_modules/angular-resource/angular-resource.min.js"></script>
         <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="node_modules/bootstrap/dist/js/npm.js"></script>
         <script type="text/javascript" src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
         <script type="text/javascript" src="node_modules/angular-i18n/angular-locale_pt-br.js"></script>
         <script type="text/javascript" src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
         <script type="text/javascript" src="node_modules/angular-ui-mask/dist/mask.min.js"></script>
         <script type="text/javascript" src="node_modules/restangular/dist/restangular.js"></script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
         <script type="text/javascript" src="node_modules/angular-block-ui/dist/angular-block-ui.min.js"></script>
         <script type="text/javascript" src="node_modules/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
         <script type="text/javascript" src="node_modules/angular-moment/angular-moment.min.js"></script>
@@ -60,12 +61,9 @@
         <!--service-->
         <script type="text/javascript" src="js/custom/service/TranslateAsyncLoader.js"></script>
         <script type="text/javascript" src="js/custom/service/TranslateService.js"></script>
-        <script type="text/javascript" src="js/custom/service/CategoriaService.js"></script>
 
         <!--repository-->
-        <script type="text/javascript" src="js/custom/repository/AbstractRepository.js"></script>
         <script type="text/javascript" src="js/custom/repository/TranslateRepository.js"></script>
-        <script type="text/javascript" src="js/custom/repository/CategoriaRepository.js"></script>
 
         <!--directivas-->
         <script type="text/javascript" src="js/custom/directive/footer/Footer.js"></script>
@@ -79,7 +77,6 @@
 
     <body id="gerqnapp-controller" data-ng-controller="AppController">
         <div class="container-fluid">
-            <!-- Mensagens -->
             <br>
             <div growl reference="1"></div>
         </div>
@@ -87,23 +84,25 @@
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#"><strong>GERQ</strong> - Gerenciamento de Produtos Químicos</a>
+                    <a class="navbar-brand"><strong>{{'SISTEMA.TITULO' | translate}}</strong> - {{'SISTEMA.SUBTITULO' | translate}}</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Inicio</a></li>
+                        <li class=""><a href="#"><strong>{{'SISTEMA.MENU.INICIO' | translate}}</strong></a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Produtos <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong>{{'SISTEMA.MENU.PRODUTOS' | translate}}</strong> <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Categoria</a></li>
+                                <li><a href="#"><strong>{{'SISTEMA.MENU.PRODUTO' | translate}}</strong></a></li>
+                                <li><a href="#"><strong>{{'SISTEMA.MENU.CATEGORIA' | translate}}</strong></a></li>
                             </ul>
                         </li>
                     </ul>
-                </div><!--/.nav-collapse -->
+                </div>
             </div>
         </nav>
 
         <div class="container theme-showcase" role="main">
+            <br><br>
             <div ui-view></div>
         </div>
 
