@@ -4,20 +4,16 @@ gerqApp.service('CategoriaService', ['CategoriaRepository',
     function (CategoriaRepository) {
     
     return {
-        list: function () {
-            return CategoriaRepository.list();
+        list: function (pagination) {
+            return CategoriaRepository.getList(pagination);
         },
 
-        add: function (categoria) {
-            return CategoriaRepository.add(categoria);
-        },
-
-        edit: function (categoria) {
-            return CategoriaRepository.edit(categoria);
+        save: function (categoria) {
+            return CategoriaRepository.save(categoria);
         },
 
         delete: function (id) {
-            return CategoriaRepository.delete(id);
+            return CategoriaRepository.remove(id);
         }
     };
     

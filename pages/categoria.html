@@ -8,19 +8,19 @@
                 <label for="descricao">{{'CATEGORIA.DESCRICAO' | translate}}</label>
                 <div class="input-group">
                     <input
-                        ng-model="categoria.descricao"
+                        ng-model="fields[0].value"
                         class="form-control"
                         id="descricao"
                         name="descricao"
                         required>
                     <span class="input-group-btn">
-                        <button ng-if="status == 'home'" ng-click="addCategoria()" class="btn btn-primary btn-lg">
+                        <button ng-if="status == 'home'" ng-click="save()" class="btn btn-primary btn-lg">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                         </button>
-                        <button ng-if="status == 'home'" class="btn btn-primary btn-lg">
+                        <button ng-if="status == 'home'" ng-click="getList()" class="btn btn-primary btn-lg">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                         </button>
-                        <button ng-if="status == 'edit'" ng-click="confirmEdit()" class="btn btn-primary btn-lg">
+                        <button ng-if="status == 'edit'" ng-click="save()" class="btn btn-primary btn-lg">
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                         </button>
                         <a ng-if="status == 'edit'" ng-click="limpar()" class="btn btn-primary btn-lg">
@@ -41,20 +41,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="categoria in categorias">
+                    <tr dir-paginate="categoria in categorias|itemsPerPage:pagination.limit" total-items="pagination.totalResults" current-page="pagination.currentPage">
                         <td width="5%">{{ categoria.id }}</td>
                         <td>{{ categoria.descricao }}</td>
                         <td width="10%" class="text-center">
                             <button class="btn btn-primary" ng-click="edit(categoria)">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                             </button>
-                            <button class="btn btn-primary" ng-click="excluir(categoria.id)">
+                            <button class="btn btn-primary" ng-click="remove(categoria.id)">
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                             </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <dir-pagination-controls max-size="5" boundary-links="true" on-page-change="getList()"></dir-pagination-controls>
         </div>
     </div>
 </div>
