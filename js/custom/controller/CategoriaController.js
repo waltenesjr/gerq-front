@@ -1,26 +1,17 @@
 'use strict';
-gerqApp.controller('CategoriaController',['$scope', '$http', '$translate',
-    function ($scope, $http, $translate) {
+gerqApp.controller('CategoriaController',['$scope', '$translate', 'CategoriaService',
+    function ($scope, $translate, CategoriaService) {
 
         $scope.categorias = [];
         $scope.categoria = {};
         $scope.status = 'home';
-        $scope.url = 'http://localhost:8080';
-
-        $scope.limpar = function () {
-            $scope.limparMensagemTela();
-            $scope.status = 'home';
-            $scope.categoria.descricao = '';
-            $scope.listarCategorias();
-        }
 
         $scope.listarCategorias = function () {
-            $http.get($scope.url + '/categorias')
-                .then(function(response) {
-                    $scope.categorias = response.data;
-                }, function (error) {
-                    console.log(error);
-                });
+            CategoriaService.list().then(function (response) {
+                $scope.categorias = response.plain();
+            }, function errorCallback(response) {
+                error(response);
+            });
         };
 
         $scope.edit = function (categoria) {
@@ -31,26 +22,20 @@ gerqApp.controller('CategoriaController',['$scope', '$http', '$translate',
 
         $scope.confirmEdit = function () {
             var data = JSON.stringify(eval({"id": $scope.categoria.id, "descricao": $scope.categoria.descricao}));
-            $http.put($scope.url + '/updateCategoria', data)
-                .then(function (response) {
-                    $scope.showMessageSuccess($translate.instant('MSG.MENSAGEM_M012'));
-                    $scope.limpar();
-                }, function (error) {
-                    console.log(error);
-                });
+            CategoriaService.add(data).then(function () {
+                sucess();
+            }, function errorCallback(response) {
+                error(response)
+            });
         }
 
         $scope.addCategoria = function () {
-            if ($scope.categoria.descricao) {
-                var data = JSON.stringify(eval({"descricao": $scope.categoria.descricao}));
-                $http.post($scope.url + '/addCategoria', data)
-                    .then(function (response) {
-                        $scope.showMessageSuccess($translate.instant('MSG.MENSAGEM_M001'));
-                        $scope.limpar();
-                    }, function (error) {
-                        console.log(error);
-                    });
-            }
+            var data = JSON.stringify(eval({"descricao": $scope.categoria.descricao}));
+            CategoriaService.add(data).then(function () {
+                sucess();
+            }, function errorCallback(response) {
+                error(response);
+            });
         };
 
         $scope.excluir = function (id) {
@@ -58,16 +43,31 @@ gerqApp.controller('CategoriaController',['$scope', '$http', '$translate',
                 message: $translate.instant('MSG.MENSAGEM_M010'),
                 callback: function (retorno) {
                     if(retorno){
-                        $http.delete($scope.url + '/deleteCategoria/' + id)
-                            .then(function (response) {
-                                $scope.showMessageSuccess($translate.instant('MSG.MENSAGEM_M011'));
-                                $scope.limpar();
-                            }, function (error) {
-                                console.log(error);
-                            });
+                        CategoriaService.delete(id).then(function () {
+                            sucess();
+                        }, function errorCallback(response) {
+                            error(response);
+                        });
                     }
                 }
             });
+        }
+
+        $scope.limpar = function () {
+            $scope.limparMensagemTela();
+            $scope.status = 'home';
+            $scope.categoria.descricao = '';
+            $scope.listarCategorias();
+        }
+
+        function sucess() {
+            $scope.showMessageSuccess($translate.instant('MSG.MENSAGEM_M001'));
+            $scope.limpar();
+        }
+
+        function error(response) {
+            console.log(angular.toJson(response));
+            $scope.showMessageError($translate.instant('MSG.MENSAGEM_ERROR'));
         }
 
         $scope.limpar();
