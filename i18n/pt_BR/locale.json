@@ -1,19 +1,40 @@
 {
 	"SISTEMA": {
-		"TITULO": "GERC",
+		"TITULO": "GERQ",
 		"SUBTITULO": "Gerenciamento de Produtos Químicos",
 		"MENU": {
 			"INICIO": "Inicio",
 			"PRODUTOS": "Produtos",
 			"PRODUTO": "Produto",
-			"CATEGORIA": "Categoria"
+			"CATEGORIA": "Categoria",
+			"EMPRESA": "Empresa"
 		}
 	},
 
 	"CATEGORIA": {
 		"CODIGO": "Código",
 		"DESCRICAO": "Descrição",
-		"CATEGORIA": "Categoria",
 		"CATEGORIAS": "Categorias"
+	},
+
+	"PRODUTO": {
+		"PRODUTO": "Produto",
+		"PRODUTOS": "Produtos",
+		"CODIGO": "Código",
+		"NOME": "Nome",
+		"DATA_VENCIMENTO": "Data de Vencimento",
+		"CORROSIVO": "Corrosivo",
+		"CATEGORIA":"Categoria"
+	},
+
+	"EMPRESA": {
+		"EMPRESAS": "Empresas",
+		"CODIGO": "Código",
+		"AREA": "Área",
+		"TELEFONE": "Telefone",
+		"ENDERECO": "Endereço",
+		"EMAIL": "Email",
+		"EMERGENCIA": "Emergência",
+		"NOME": "Nome"
 	}
 }

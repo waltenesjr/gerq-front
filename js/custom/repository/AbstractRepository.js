@@ -17,6 +17,10 @@ gerqApp.factory('AbstractRepository', [function() {
             return this.restangular.one(this.route + '/get', id).get();
         },
 
+        all: function () {
+            return this.restangular.one(this.route + '/all').get();
+        },
+
         save: function (resource) {
             return resource.id ? this.update(resource) : this.create(resource);
         },

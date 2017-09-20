@@ -68,7 +68,8 @@
     "DATA": "Data",
     "DATA_INICIAL": "Data Inicial",
     "DATA_FINAL": "Data Final",
-    "EMAIL_INVALIDO": "E-mail inválido"
+    "EMAIL_INVALIDO": "E-mail inválido",
+    "PESQUISAR": "PESQUISAR"
   },
 
   "VALIDACAO": {

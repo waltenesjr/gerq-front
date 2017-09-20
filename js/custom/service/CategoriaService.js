@@ -14,6 +14,10 @@ gerqApp.service('CategoriaService', ['CategoriaRepository',
 
         delete: function (id) {
             return CategoriaRepository.remove(id);
+        },
+
+        all: function () {
+            return CategoriaRepository.all();
         }
     };
     

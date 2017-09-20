@@ -1,12 +1,12 @@
 'use strict';
-gerqApp.controller('CategoriaController',['$scope', '$translate', 'CategoriaService',
-    function ($scope, $translate, CategoriaService) {
+gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService',
+    function ($scope, $translate, ProdutoService) {
 
         $scope.getList = function () {
             $scope.pagination.fields = angular.copy($scope.fields);
-            CategoriaService.list($scope.pagination).then(function (response) {
+            ProdutoService.list($scope.pagination).then(function (response) {
                 var dados = response.plain();
-                $scope.categorias = dados.list;
+                $scope.produtos = dados.list;
                 $scope.pagination.totalResults = dados.totalResults;
             }, function errorCallback(response) {
                 error(response);
@@ -14,23 +14,27 @@ gerqApp.controller('CategoriaController',['$scope', '$translate', 'CategoriaServ
         };
 
         $scope.save = function () {
-            $scope.categoria.descricao = $scope.fields[0].value;
-            CategoriaService.save($scope.categoria).then(function () {
+            ProdutoService.save($scope.produto).then(function () {
                 sucess();
             }, function errorCallback(response) {
                 error(response);
             });
         };
 
-        $scope.edit = function (categoria) {
-            $scope.fields[0].value = categoria.descricao;
-            $scope.categoria.id = categoria.id;
+        $scope.edit = function (id) {
             $scope.status = 'edit';
+            get(id);
+        }
+
+        $scope.detail = function (id) {
+            $scope.status = 'detail';
+            get(id);
         }
 
         $scope.add = function () {
-            $scope.fields[0].value = '';
-            $scope.categoria = {};
+            $scope.produto = {
+                categoria: {}
+            };
             $scope.status = 'edit';
         }
 
@@ -39,7 +43,7 @@ gerqApp.controller('CategoriaController',['$scope', '$translate', 'CategoriaServ
                 message: $translate.instant('MSG.MENSAGEM_M010'),
                 callback: function (retorno) {
                     if(retorno){
-                        CategoriaService.delete(id).then(function () {
+                        ProdutoService.delete(id).then(function () {
                             sucess();
                         }, function errorCallback(response) {
                             error(response);
@@ -51,6 +55,7 @@ gerqApp.controller('CategoriaController',['$scope', '$translate', 'CategoriaServ
 
         $scope.limpar = function () {
             $scope.limparMensagemTela();
+            $scope.tab = 1;
             $scope.status = 'list';
             $scope.pagination = {
                 currentPage: 1,
@@ -59,14 +64,29 @@ gerqApp.controller('CategoriaController',['$scope', '$translate', 'CategoriaServ
                 fields: angular.copy($scope.fields)
             };
             $scope.fields = [
-                {name: 'descricao', value: null}
+                {name: 'nome', value: null}
             ];
-            $scope.fields[0].value = '';
-            $scope.categoria = {};
+            allCategorias();
             $scope.getList();
         }
 
         $scope.limpar();
+
+        function get(id) {
+            ProdutoService.get(id).then(function (response) {
+                $scope.produto = response.plain();
+            }, function errorCallback(response) {
+                error(response);
+            });
+        }
+
+        function allCategorias() {
+            ProdutoService.categorias().then(function (response) {
+                $scope.categorias = response.plain();
+            }, function errorCallback(response) {
+                error(response);
+            });
+        }
 
         function sucess() {
             $scope.showMessageSuccess($translate.instant('MSG.MENSAGEM_M001'));

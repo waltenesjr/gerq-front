@@ -1,0 +1,122 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h2 class="panel-title"><strong>{{'PRODUTO.PRODUTOS' | translate}}</strong></h2>
+    </div>
+    <div class="panel-body">
+        <!-- List -->
+        <div ng-if="status == 'list'">
+            <form>
+                <div class="form-group form-group-lg">
+                    <div class="input-group">
+                        <input placeholder="{{'LABEL.PESQUISAR' | translate}}" ng-model="fields[0].value" class="form-control" id="descricao" name="descricao">
+                        <span class="input-group-btn">
+                            <button type="submit" ng-click="getList()" class="btn btn-primary btn-lg">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>{{'PRODUTO.CODIGO' | translate}}</th>
+                        <th>{{'PRODUTO.NOME' | translate}}</th>
+                        <th>{{'PRODUTO.DATA_VENCIMENTO' | translate}}</th>
+                        <th>{{'CATEGORIA.CATEGORIA' | translate}}</th>
+                        <th>{{'LABEL.ACOES' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr dir-paginate="produto in produtos|itemsPerPage:pagination.limit" total-items="pagination.totalResults" current-page="pagination.currentPage">
+                        <td width="5%">{{ produto.id }}</td>
+                        <td>{{ produto.nome }}</td>
+                        <td width="15%">{{ produto.dataVencimento | date:"dd/MM/yyyy" }}</td>
+                        <td width="15%">{{ produto.categoria.descricao }}</td>
+                        <td width="15%" class="text-center">
+                            <button class="btn btn-primary" ng-click="edit(produto.id)">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            </button>
+                            <button class="btn btn-primary" ng-click="remove(produto.id)">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                            <button class="btn btn-primary" ng-click="detail(produto.id)">
+                                <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <dir-pagination-controls max-size="5" boundary-links="true" on-page-change="getList()"></dir-pagination-controls>
+            <hr>
+            <div style="text-align: right">
+                <a ng-click="add()" class="btn btn-primary btn-lg">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><strong> {{'LABEL.NOVO' | translate}}</strong>
+                </a>
+            </div>
+        </div>
+        <!-- Form -->
+        <div ng-if="status == 'edit' || status == 'detail'">
+            <uib-tabset active="activeForm">
+                <uib-tab index="0" heading="Identificação"><br>
+                    <div class="form-group form-group-lg">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="nome">{{'PRODUTO.NOME' | translate}}</label><br>
+                                <label ng-if="status == 'detail'" class="label-detail">{{ produto.nome }}</label>
+                                <input ng-model="produto.nome" class="form-control" id="nome" name="nome" ng-if="status == 'edit'">
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="selectCategoria"><translate>{{'PRODUTO.CATEGORIA' | translate}}</label><br>
+                                <label ng-if="status == 'detail'" class="label-detail">{{ produto.categoria.descricao }}</label>
+                                <select class="form-control dropdown-toggle" ng-model="produto.categoria.id" id="selectCategoria" name="selectCategoria"
+                                        ng-if="status == 'edit'" ng-options="categoria.id as categoria.descricao for categoria in categorias">
+                                    <option value="">{{'LABEL.SELECIONE' | translate}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4" ng-if="status == 'edit'">
+                                <label-input-date ng-id="dataVencimento" ng-label="PRODUTO.DATA_VENCIMENTO" ng-obrigatorio="false" ng-disabled="false" ng-model="produto.dataVencimento" form="produtoForm"/>
+                            </div>
+                            <div class="col-md-4" ng-if="status == 'detail'">
+                                <label for="selectCategoria"><translate>{{'PRODUTO.DATA_VENCIMENTO' | translate}}</label><br>
+                                <label class="label-detail">{{ produto.dataVencimento | date:"dd/MM/yyyy" }}</label>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-md-4" ng-if="status == 'edit'">
+                                <label>{{'PRODUTO.CORROSIVO' |  translate}}
+                                    <input id="checkCorrosivo" name="checkCorrosivo" type="checkbox" value="true" ng-model="produto.corrosivo">
+                                </label>
+                            </div>
+
+                            <div class="col-md-4" ng-if="status == 'detail'">
+                                <label>{{'PRODUTO.CORROSIVO' |  translate}}</label><br>
+                                <label class="label-detail">{{ produto.corrosivo ? ('LABEL.SIM' | translate) : ('LABEL.NAO' | translate) }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab index="1" heading="Perigos"><br>
+
+
+                </uib-tab>
+                <uib-tab index="2" heading="Ingredientes"><br>
+
+
+                </uib-tab>
+            </uib-tabset>
+            <hr>
+            <div style="text-align: right">
+                <a ng-if="status == 'edit'" ng-click="save()" class="btn btn-primary btn-lg">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span><strong> {{'LABEL.SALVAR' | translate}}</strong>
+                </a>
+                <a ng-click="limpar()" class="btn btn-primary btn-lg">
+                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span><strong> {{'LABEL.VOLTAR' | translate}}</strong>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -24,7 +24,7 @@ angular.module('app').directive('labelInputDate', ['$translate', function ($tran
         },
         replace: true,
         restrict: 'E',
-        templateUrl: 'node_modules/arq-front/directive/labelInputDate/labelInputDate.html',
+        templateUrl: 'js/custom/directive/labelInputDate/labelInputDate.html',
         controller: ['$scope', '$element', '$attrs', function ($scope, $element, $attrs) {
             if ($scope.id === undefined) {
                 $scope.id = $attrs['ngModel'];
@@ -119,7 +119,9 @@ angular.module('app').directive('labelInputDate', ['$translate', function ($tran
             };
 
             $scope.formataDataAoDesfocar = function ($e) {
-                formataDataInput($e.currentTarget.value);
+                if ($e.currentTarget) {
+                    formataDataInput($e.currentTarget.value);
+                }
             };
 
             $scope.formataDataAoSelecionar = function (model) {

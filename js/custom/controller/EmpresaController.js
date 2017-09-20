@@ -1,12 +1,12 @@
 'use strict';
-gerqApp.controller('CategoriaController',['$scope', '$translate', 'CategoriaService',
-    function ($scope, $translate, CategoriaService) {
+gerqApp.controller('EmpresaController',['$scope', '$translate', 'EmpresaService',
+    function ($scope, $translate, EmpresaService) {
 
         $scope.getList = function () {
             $scope.pagination.fields = angular.copy($scope.fields);
-            CategoriaService.list($scope.pagination).then(function (response) {
+            EmpresaService.list($scope.pagination).then(function (response) {
                 var dados = response.plain();
-                $scope.categorias = dados.list;
+                $scope.empresas = dados.list;
                 $scope.pagination.totalResults = dados.totalResults;
             }, function errorCallback(response) {
                 error(response);
@@ -15,22 +15,20 @@ gerqApp.controller('CategoriaController',['$scope', '$translate', 'CategoriaServ
 
         $scope.save = function () {
             $scope.categoria.descricao = $scope.fields[0].value;
-            CategoriaService.save($scope.categoria).then(function () {
+            EmpresaService.save($scope.empresa).then(function () {
                 sucess();
             }, function errorCallback(response) {
                 error(response);
             });
         };
 
-        $scope.edit = function (categoria) {
-            $scope.fields[0].value = categoria.descricao;
-            $scope.categoria.id = categoria.id;
+        $scope.edit = function (empresa) {
             $scope.status = 'edit';
         }
 
         $scope.add = function () {
             $scope.fields[0].value = '';
-            $scope.categoria = {};
+            $scope.empresa = {};
             $scope.status = 'edit';
         }
 
@@ -39,7 +37,7 @@ gerqApp.controller('CategoriaController',['$scope', '$translate', 'CategoriaServ
                 message: $translate.instant('MSG.MENSAGEM_M010'),
                 callback: function (retorno) {
                     if(retorno){
-                        CategoriaService.delete(id).then(function () {
+                        EmpresaService.delete(id).then(function () {
                             sucess();
                         }, function errorCallback(response) {
                             error(response);
@@ -59,10 +57,10 @@ gerqApp.controller('CategoriaController',['$scope', '$translate', 'CategoriaServ
                 fields: angular.copy($scope.fields)
             };
             $scope.fields = [
-                {name: 'descricao', value: null}
+                {name: 'nome', value: null}
             ];
             $scope.fields[0].value = '';
-            $scope.categoria = {};
+            $scope.empresa = {};
             $scope.getList();
         }
 

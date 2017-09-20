@@ -2,6 +2,14 @@ label {
     color: #337ab7;
 }
 
+th {
+    text-align: center;
+}
+
+hr {
+    border-top: 1px solid #337ab7 !important;
+}
+
 .modal-header {
     background-color: #337ab7;
     color: white;
@@ -53,3 +61,27 @@ label {
     top: 65px !important;
     right: 12px;
 }
+
+.pagination {
+    padding: 0 !important;
+    font-size: 18px !important;
+    line-height: 1.3333333 !important;
+    margin: 0 !important;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    color: white !important;
+    background-color: #337ab7 !important;
+    font-weight: bold !important;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #337ab7 !important;
+}
+
+.label-detail {
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+

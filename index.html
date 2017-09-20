@@ -7,10 +7,10 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>GERQ - Gerenciamento de Produtos Químicos</title>
+        <title>{{'SISTEMA.TITULO' | translate}} - {{'SISTEMA.SUBTITULO' | translate}}</title>
 
         <link type="image/png" rel="icon" href="img/ico.png"/>
-        <link rel="shortcut" href="img/ico.png">
+        <link type="image/png" rel="shortcut" href="img/ico.png">
 
         <!--CSS-->
         <link type="text/css" rel="stylesheet" href="css/app.css">
@@ -58,17 +58,23 @@
         <!--controller-->
         <script src="js/custom/controller/AppController.js"></script>
         <script src="js/custom/controller/CategoriaController.js"></script>
+        <script src="js/custom/controller/ProdutoController.js"></script>
+        <script src="js/custom/controller/EmpresaController.js"></script>
 
         <!--service-->
         <script type="text/javascript" src="js/custom/service/TranslateAsyncLoader.js"></script>
         <script type="text/javascript" src="js/custom/service/TranslateService.js"></script>
         <script type="text/javascript" src="js/custom/service/ServiceRestangular.js"></script>
         <script type="text/javascript" src="js/custom/service/CategoriaService.js"></script>
+        <script type="text/javascript" src="js/custom/service/ProdutoService.js"></script>
+        <script type="text/javascript" src="js/custom/service/EmpresaService.js"></script>
 
         <!--repository-->
         <script type="text/javascript" src="js/custom/repository/TranslateRepository.js"></script>
         <script type="text/javascript" src="js/custom/repository/AbstractRepository.js"></script>
         <script type="text/javascript" src="js/custom/repository/CategoriaRepository.js"></script>
+        <script type="text/javascript" src="js/custom/repository/ProdutoRepository.js"></script>
+        <script type="text/javascript" src="js/custom/repository/EmpresaRepository.js"></script>
 
         <!--directivas-->
         <script type="text/javascript" src="js/custom/directive/footer/Footer.js"></script>
@@ -95,10 +101,11 @@
                     <ul class="nav navbar-nav">
                         <li class=""><a href="#"><strong>{{'SISTEMA.MENU.INICIO' | translate}}</strong></a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong>{{'SISTEMA.MENU.PRODUTOS' | translate}}</strong> <span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong>{{'SISTEMA.MENU.PRODUTOS' | translate}}</strong> <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><strong>{{'SISTEMA.MENU.PRODUTO' | translate}}</strong></a></li>
-                                <li><a href="#"><strong>{{'SISTEMA.MENU.CATEGORIA' | translate}}</strong></a></li>
+                                <li><a href="#!/produto"><strong>{{'SISTEMA.MENU.PRODUTO' | translate}}</strong></a></li>
+                                <li><a href="#!/categoria"><strong>{{'SISTEMA.MENU.CATEGORIA' | translate}}</strong></a></li>
+                                <li><a href="#!/empresa"><strong>{{'SISTEMA.MENU.EMPRESA' | translate}}</strong></a></li>
                             </ul>
                         </li>
                     </ul>

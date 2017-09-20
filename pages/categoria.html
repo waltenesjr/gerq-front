@@ -1,37 +1,34 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h2 class="panel-title"><strong>{{'CATEGORIA.CATEGORIA' | translate}}</strong></h2>
+        <h2 class="panel-title"><strong>{{'CATEGORIA.CATEGORIAS' | translate}}</strong></h2>
     </div>
     <div class="panel-body">
         <form name="categoriaForm">
             <div class="form-group form-group-lg">
-                <label for="descricao">{{'CATEGORIA.DESCRICAO' | translate}}</label>
-                <div class="input-group">
-                    <input
-                        ng-model="fields[0].value"
-                        class="form-control"
-                        id="descricao"
-                        name="descricao"
-                        required>
+                <div class="input-group" ng-if="status == 'list'">
+                    <input placeholder="{{'LABEL.PESQUISAR' | translate}}" ng-model="fields[0].value" class="form-control" id="descricao" name="descricao">
                     <span class="input-group-btn">
-                        <button ng-if="status == 'home'" ng-click="save()" class="btn btn-primary btn-lg">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                        </button>
-                        <button ng-if="status == 'home'" ng-click="getList()" class="btn btn-primary btn-lg">
+                        <button ng-if="status == 'list'" ng-click="getList()" class="btn btn-primary btn-lg">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                         </button>
-                        <button ng-if="status == 'edit'" ng-click="save()" class="btn btn-primary btn-lg">
-                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                        </button>
-                        <a ng-if="status == 'edit'" ng-click="limpar()" class="btn btn-primary btn-lg">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </a>
                     </span>
+                </div>
+                <div class="form-group" ng-if="status == 'edit'">
+                    <label>{{'CATEGORIA.DESCRICAO' | translate}}</label>
+                    <input ng-model="fields[0].value" class="form-control" id="descricao" name="descricao">
+                </div>
+                <div style="text-align: right;" ng-if="status == 'edit'">
+                    <hr>
+                    <button ng-click="save()" class="btn btn-primary btn-lg">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{'LABEL.SALVAR' | translate}}
+                    </button>
+                    <a ng-click="limpar()" class="btn btn-primary btn-lg">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{'LABEL.VOLTAR' | translate}}
+                    </a>
                 </div>
             </div>
         </form><br>
-        <div ng-if="categorias.length > 0">
-            <label><strong>{{'CATEGORIA.CATEGORIAS' | translate}}</strong></label>
+        <div ng-if="categorias.length > 0 && status == 'list'">
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
@@ -55,7 +52,13 @@
                     </tr>
                 </tbody>
             </table>
-            <dir-pagination-controls max-size="5" boundary-links="true" on-page-change="getList()"></dir-pagination-controls>
+            <dir-pagination-controls layout-align="center center" max-size="5" boundary-links="true" on-page-change="getList()"></dir-pagination-controls>
+        </div>
+        <div style="text-align: right;" ng-if="status == 'list'">
+            <hr>
+            <button ng-click="add()" class="btn btn-primary btn-lg">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><strong> {{'LABEL.NOVO' | translate}}</strong>
+            </button>
         </div>
     </div>
 </div>
