@@ -33,7 +33,8 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
 
         $scope.add = function () {
             $scope.produto = {
-                categoria: {}
+                categoria: {},
+                empresa: {}
             };
             $scope.status = 'edit';
         }
@@ -67,6 +68,7 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
                 {name: 'nome', value: null}
             ];
             allCategorias();
+            allEmpresas();
             $scope.getList();
         }
 
@@ -83,6 +85,14 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         function allCategorias() {
             ProdutoService.categorias().then(function (response) {
                 $scope.categorias = response.plain();
+            }, function errorCallback(response) {
+                error(response);
+            });
+        }
+
+        function allEmpresas() {
+            ProdutoService.empresas().then(function (response) {
+                $scope.empresas = response.plain();
             }, function errorCallback(response) {
                 error(response);
             });

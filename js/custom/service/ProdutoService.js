@@ -1,7 +1,7 @@
 "use strict";
 
-gerqApp.service('ProdutoService', ['ProdutoRepository', 'CategoriaService',
-    function (ProdutoRepository, CategoriaService) {
+gerqApp.service('ProdutoService', ['ProdutoRepository', 'CategoriaService', 'EmpresaService',
+    function (ProdutoRepository, CategoriaService, EmpresaService) {
     
     return {
         get: function (id) {
@@ -22,6 +22,10 @@ gerqApp.service('ProdutoService', ['ProdutoRepository', 'CategoriaService',
 
         categorias: function () {
             return CategoriaService.all();
+        },
+
+        empresas: function () {
+            return EmpresaService.all();
         }
     };
     

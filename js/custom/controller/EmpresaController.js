@@ -14,7 +14,6 @@ gerqApp.controller('EmpresaController',['$scope', '$translate', 'EmpresaService'
         };
 
         $scope.save = function () {
-            $scope.categoria.descricao = $scope.fields[0].value;
             EmpresaService.save($scope.empresa).then(function () {
                 sucess();
             }, function errorCallback(response) {
@@ -23,6 +22,7 @@ gerqApp.controller('EmpresaController',['$scope', '$translate', 'EmpresaService'
         };
 
         $scope.edit = function (empresa) {
+            $scope.empresa = empresa;
             $scope.status = 'edit';
         }
 

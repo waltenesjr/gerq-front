@@ -66,8 +66,16 @@
                                 <label ng-if="status == 'detail'" class="label-detail">{{ produto.nome }}</label>
                                 <input ng-model="produto.nome" class="form-control" id="nome" name="nome" ng-if="status == 'edit'">
                             </div>
-                        </div><br>
+                        </div><br ng-if="status == 'edit'">
                         <div class="row">
+                            <div class="col-md-8">
+                                <label for="selectEmpresa"><translate>{{'PRODUTO.EMPRESA' | translate}}</label><br>
+                                <label ng-if="status == 'detail'" class="label-detail">{{ produto.empresa.nome }}</label>
+                                <select class="form-control dropdown-toggle" ng-model="produto.empresa.id" id="selectEmpresa" name="selectEmpresa"
+                                        ng-if="status == 'edit'" ng-options="emp.id as emp.nome for emp in empresas">
+                                    <option value="">{{'LABEL.SELECIONE' | translate}}</option>
+                                </select>
+                            </div>
                             <div class="col-md-4">
                                 <label for="selectCategoria"><translate>{{'PRODUTO.CATEGORIA' | translate}}</label><br>
                                 <label ng-if="status == 'detail'" class="label-detail">{{ produto.categoria.descricao }}</label>
@@ -76,6 +84,8 @@
                                     <option value="">{{'LABEL.SELECIONE' | translate}}</option>
                                 </select>
                             </div>
+                        </div><br ng-if="status == 'edit'">
+                        <div class="row">
                             <div class="col-md-4" ng-if="status == 'edit'">
                                 <label-input-date ng-id="dataVencimento" ng-label="PRODUTO.DATA_VENCIMENTO" ng-obrigatorio="false" ng-disabled="false" ng-model="produto.dataVencimento" form="produtoForm"/>
                             </div>
@@ -83,14 +93,13 @@
                                 <label for="selectCategoria"><translate>{{'PRODUTO.DATA_VENCIMENTO' | translate}}</label><br>
                                 <label class="label-detail">{{ produto.dataVencimento | date:"dd/MM/yyyy" }}</label>
                             </div>
-                        </div><br>
+                        </div><br ng-if="status == 'edit'">
                         <div class="row">
                             <div class="col-md-4" ng-if="status == 'edit'">
                                 <label>{{'PRODUTO.CORROSIVO' |  translate}}
                                     <input id="checkCorrosivo" name="checkCorrosivo" type="checkbox" value="true" ng-model="produto.corrosivo">
                                 </label>
                             </div>
-
                             <div class="col-md-4" ng-if="status == 'detail'">
                                 <label>{{'PRODUTO.CORROSIVO' |  translate}}</label><br>
                                 <label class="label-detail">{{ produto.corrosivo ? ('LABEL.SIM' | translate) : ('LABEL.NAO' | translate) }}</label>

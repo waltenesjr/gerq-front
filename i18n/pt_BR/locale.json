@@ -24,7 +24,8 @@
 		"NOME": "Nome",
 		"DATA_VENCIMENTO": "Data de Vencimento",
 		"CORROSIVO": "Corrosivo",
-		"CATEGORIA":"Categoria"
+		"CATEGORIA":"Categoria",
+		"EMPRESA": "Empresa"
 	},
 
 	"EMPRESA": {
