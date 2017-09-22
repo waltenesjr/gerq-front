@@ -85,7 +85,7 @@
   "MSG": {
     "POPUP_BLOQUEADA_BOLETO": "Popup bloqueada! Para visualizar o boleto, altere as configurações do seu navegador.",
     "MENSAGEM_ERROR": "Ocorreu algum erro Inesperado, entre em contato com o administrador do sistema:",
-    "MENSAGEM_M001": "Dados salvos com sucesso!",
+    "MENSAGEM_M001": "Operação realizada com sucesso!",
     "MENSAGEM_M012": "Dados alterados com sucesso!",
     "MENSAGEM_M007": "Falha na conexão com a Intranet. Entrar em contato com o administrador do sistema.",
     "MENSAGEM_M010": "Deseja realmente efetuar esta operação?",

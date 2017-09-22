@@ -17,22 +17,20 @@
                     </div>
                 </div>
             </form>
-            <table class="table table-bordered table-hover">
+            <table ng-if="produtos.length > 0" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>{{'PRODUTO.CODIGO' | translate}}</th>
                         <th>{{'PRODUTO.NOME' | translate}}</th>
                         <th>{{'PRODUTO.DATA_VENCIMENTO' | translate}}</th>
-                        <th>{{'CATEGORIA.CATEGORIA' | translate}}</th>
                         <th>{{'LABEL.ACOES' | translate}}</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr dir-paginate="produto in produtos|itemsPerPage:pagination.limit" total-items="pagination.totalResults" current-page="pagination.currentPage">
-                        <td width="5%">{{ produto.id }}</td>
+                        <td width="5%">{{ produto.codigo_servico }}</td>
                         <td>{{ produto.nome }}</td>
                         <td width="15%">{{ produto.dataVencimento | date:"dd/MM/yyyy" }}</td>
-                        <td width="15%">{{ produto.categoria.descricao }}</td>
                         <td width="15%" class="text-center">
                             <button class="btn btn-primary" ng-click="edit(produto.id)">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
@@ -47,7 +45,7 @@
                     </tr>
                 </tbody>
             </table>
-            <dir-pagination-controls max-size="5" boundary-links="true" on-page-change="getList()"></dir-pagination-controls>
+            <dir-pagination-controls ng-if="produtos.length > 0" max-size="5" boundary-links="true" on-page-change="getList()"></dir-pagination-controls>
             <hr>
             <div style="text-align: right">
                 <a ng-click="add()" class="btn btn-primary btn-lg">
@@ -61,7 +59,12 @@
                 <uib-tab index="0" heading="Identificação"><br>
                     <div class="form-group form-group-lg">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-2">
+                                <label for="nome">{{'PRODUTO.CODIGO' | translate}}</label><br>
+                                <label ng-if="status == 'detail'" class="label-detail">{{ produto.codigo_servico }}</label>
+                                <input ng-model="produto.codigo_servico" class="form-control" id="codigo" name="codigo" ng-if="status == 'edit'">
+                            </div>
+                            <div class="col-md-10">
                                 <label for="nome">{{'PRODUTO.NOME' | translate}}</label><br>
                                 <label ng-if="status == 'detail'" class="label-detail">{{ produto.nome }}</label>
                                 <input ng-model="produto.nome" class="form-control" id="nome" name="nome" ng-if="status == 'edit'">
@@ -107,9 +110,49 @@
                         </div>
                     </div>
                 </uib-tab>
-                <uib-tab index="1" heading="Perigos"><br>
-
-
+                <uib-tab index="1" heading="{{'PERIGO.PERIGO' | translate}}"><br>
+                    <form name="perigoForm">
+                        <div class="form-group form-group-lg">
+                            <div class="form-group">
+                                <label>{{'PERIGO.TITULO' | translate}}</label>
+                                <input ng-model="perigo.titulo" class="form-control" id="titulo" name="titulo">
+                            </div>
+                            <div class="form-group">
+                                <label>{{'PERIGO.DESCRICAO' | translate}}</label>
+                                <input ng-model="perigo.descricao" class="form-control" id="descricao" name="descricao">
+                            </div>
+                            <div style="text-align: right;">
+                                <hr>
+                                <button ng-click="addPerigo()" class="btn btn-primary btn-lg">
+                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{'LABEL.ADICIONAR' | translate}}
+                                </button>
+                            </div><br>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>{{'PERIGO.TITULO' | translate}}</th>
+                                    <th>{{'PERIGO.DESCRICAO' | translate}}</th>
+                                    <th>{{'LABEL.ACOES' | translate}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr dir-paginate="perigo in perigos|itemsPerPage:pagination.limit">
+                                    <td width="30%">{{ perigo.titulo }}</td>
+                                    <td>{{ perigo.descricao }}</td>
+                                    <td width="10%" class="text-center">
+                                        <button class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        </button>
+                                        <button class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <dir-pagination-controls layout-align="center center" max-size="5" boundary-links="true"></dir-pagination-controls>
+                        </div>
+                    </form><br>
                 </uib-tab>
                 <uib-tab index="2" heading="Ingredientes"><br>
 

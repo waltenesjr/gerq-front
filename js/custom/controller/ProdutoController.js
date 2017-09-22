@@ -14,6 +14,7 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         };
 
         $scope.save = function () {
+            $scope.produto.perigos = $scope.perigos;
             ProdutoService.save($scope.produto).then(function () {
                 sucess();
             }, function errorCallback(response) {
@@ -22,6 +23,8 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         };
 
         $scope.edit = function (id) {
+            $scope.perigos = [];
+            $scope.perigo = {};
             $scope.status = 'edit';
             get(id);
         }
@@ -32,11 +35,17 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         }
 
         $scope.add = function () {
+            $scope.perigos = [];
+            $scope.perigo = {};
             $scope.produto = {
                 categoria: {},
                 empresa: {}
             };
             $scope.status = 'edit';
+        }
+
+        $scope.addPerigo = function () {
+            $scope.perigos.push($scope.perigo);
         }
 
         $scope.remove = function (id) {
