@@ -7,7 +7,8 @@
 			"PRODUTOS": "Produtos",
 			"PRODUTO": "Produto",
 			"CATEGORIA": "Categoria",
-			"EMPRESA": "Empresa"
+			"EMPRESA": "Empresa",
+			"PERIGOS": "Perigos"
 		}
 	},
 
@@ -40,6 +41,7 @@
 	},
 
 	"PERIGO": {
+		"PERIGOS": "Perigos",
 		"PERIGO": "Perigo",
 		"TITULO": "Título",
 		"DESCRICAO": "Descrição"

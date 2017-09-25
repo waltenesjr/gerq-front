@@ -46,6 +46,7 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
 
         $scope.addPerigo = function () {
             $scope.perigos.push($scope.perigo);
+            $scope.perigo = {};
         }
 
         $scope.remove = function (id) {
@@ -86,6 +87,7 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         function get(id) {
             ProdutoService.get(id).then(function (response) {
                 $scope.produto = response.plain();
+                $scope.perigos = $scope.produto.perigos;
             }, function errorCallback(response) {
                 error(response);
             });

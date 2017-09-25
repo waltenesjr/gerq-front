@@ -21,5 +21,10 @@ gerqApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
             templateUrl: "pages/empresa.html",
             controller: 'EmpresaController'
         })
+        .state('perigo', {
+            url: "/perigo",
+            templateUrl: "pages/perigo.html",
+            controller: 'PerigoController'
+        })
     //###################### FIM DA DEFINICAO DO PADRAO DAS ROTAS ACESSAVEIS ######################
 }]);

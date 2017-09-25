@@ -26,6 +26,10 @@ gerqApp.service('ProdutoService', ['ProdutoRepository', 'CategoriaService', 'Emp
 
         empresas: function () {
             return EmpresaService.all();
+        },
+
+        all: function () {
+            return ProdutoRepository.all();
         }
     };
     
