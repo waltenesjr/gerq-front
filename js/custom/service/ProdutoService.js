@@ -30,6 +30,10 @@ gerqApp.service('ProdutoService', ['ProdutoRepository', 'CategoriaService', 'Emp
 
         all: function () {
             return ProdutoRepository.all();
+        },
+
+        findByname: function (name) {
+            return ProdutoRepository.findByName(name);
         }
     };
     

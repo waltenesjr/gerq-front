@@ -1,21 +1,11 @@
 'use strict';
-gerqApp.controller('PerigoController',['$scope', '$translate', 'PerigoService',
-    function ($scope, $translate, PerigoService) {
-
-        $scope.produto = {};
-
-        $scope.changePerigo = function () {
-            $scope.perigos = $scope.produto.perigos;
+gerqApp.controller('PerigoController',['$scope', '$translate', 'PerigoService', 'ProdutoService',
+    function ($scope, $translate, PerigoService, ProdutoService) {
+        $scope.setProduto = function (item) {
+            $scope.perigos = item.perigos;
         }
-
-        function allProdutos() {
-            PerigoService.produtos().then(function (response) {
-                $scope.produtos = response.plain();
-            }, function errorCallback(response) {
-                error(response);
-            });
+        $scope.findByname = function (name) {
+            return ProdutoService.findByname(name);
         }
-
-        allProdutos();
 }]);
 

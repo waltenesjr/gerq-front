@@ -25,7 +25,7 @@ angular.module('app').directive("autoComplete", ["$translate", "$timeout",
             },
             replace: true,
             restrict: 'E',
-            templateUrl: 'node_modules/arq-front/directive/autoComplete/autoComplete.html',
+            templateUrl: 'js/custom/directive/autoComplete/autoComplete.html',
             controller: ['$scope', '$element', '$attrs', function ($scope, $element, $attrs) {
 
 

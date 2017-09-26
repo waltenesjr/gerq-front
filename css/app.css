@@ -52,10 +52,6 @@ hr {
     color: white !important;
 }
 
-.dropdown-menu > li > a {
-    color: #337ab7 !important;
-}
-
 /* Posição da mensagem */
 .toast-top-right {
     top: 65px !important;

@@ -3,15 +3,20 @@
         <h2 class="panel-title"><strong>{{'PERIGO.PERIGOS' | translate}}</strong></h2>
     </div>
     <div class="panel-body">
-        <div class="form-group form-group-lg">
-            <div class="row">
-                <label for="selectEmpresa"><translate>{{'PRODUTO.PRODUTO' | translate}}</label><br>
-                <select class="form-control dropdown-toggle" ng-model="produto" id="selectEmpresa" name="selectEmpresa"
-                        data-ng-change="changePerigo()" ng-options="prod as prod.nome for prod in produtos">
-                    <option value="">{{'LABEL.SELECIONE' | translate}}</option>
-                </select>
-            </div>
-        </div>
+        <form id="autoCompleteForm" autocomplete="off">
+            <auto-complete
+                    ng-find="findByname(value)"
+                    propriedades="['nome']"
+                    ng-id="idProduto"
+                    ng-label="PRODUTO.PRODUTO"
+                    ng-model="produto"
+                    ng-identificador="id"
+                    ng-min-length="3"
+                    ng-class-scroll="scroll"
+                    form="autoCompleteForm"
+                    ng-set-result="setProduto(item)">
+            </auto-complete>
+        </form>
         <div ng-repeat="perigo in perigos">
             <div class="panel panel-danger">
                 <div class="panel-heading"><strong>{{ perigo.titulo }}</strong></div>
