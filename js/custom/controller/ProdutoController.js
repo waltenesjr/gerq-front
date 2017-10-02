@@ -3,6 +3,7 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
     function ($scope, $translate, ProdutoService) {
 
         $scope.getList = function () {
+            $scope.pagination.sort = angular.copy($scope.sort);
             $scope.pagination.fields = angular.copy($scope.fields);
             ProdutoService.list($scope.pagination).then(function (response) {
                 var dados = response.plain();
@@ -11,6 +12,27 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
             }, function errorCallback(response) {
                 error(response);
             });
+        };
+
+        $scope.onSort = function (position, field) {
+            $scope.sort.field = field;
+            if (!$scope.orders[position].direction) {
+                $scope.orders[position].direction = 'desc';
+                $scope.sort.direction = 'desc';
+                $scope.getList();
+                return;
+            }
+            if ($scope.orders[position].direction === 'asc') {
+                $scope.orders[position].direction = 'desc';
+                $scope.sort.direction = 'desc';
+                $scope.getList();
+                return;
+            }
+            if ($scope.orders[position].direction === 'desc') {
+                $scope.orders[position].direction = 'asc';
+                $scope.sort.direction = 'asc';
+                $scope.getList();
+            }
         };
 
         $scope.save = function () {
@@ -23,6 +45,9 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         };
 
         $scope.edit = function (id) {
+            $scope.focuEdit = true;
+            allCategorias();
+            allEmpresas();
             $scope.perigos = [];
             $scope.perigo = {};
             $scope.status = 'edit';
@@ -35,6 +60,9 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         }
 
         $scope.add = function () {
+            $scope.focuEdit = true;
+            allCategorias();
+            allEmpresas();
             $scope.perigos = [];
             $scope.perigo = {};
             $scope.produto = {
@@ -77,9 +105,12 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
             $scope.fields = [
                 {name: 'nome', value: null}
             ];
-            allCategorias();
-            allEmpresas();
+            $scope.orders = [
+                {direction: null}
+            ];
+            $scope.sort = {};
             $scope.getList();
+            $scope.focuPesquisa = true;
         }
 
         $scope.limpar();

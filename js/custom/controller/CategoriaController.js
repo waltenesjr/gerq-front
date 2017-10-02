@@ -26,12 +26,14 @@ gerqApp.controller('CategoriaController',['$scope', '$translate', 'CategoriaServ
             $scope.fields[0].value = categoria.descricao;
             $scope.categoria.id = categoria.id;
             $scope.status = 'edit';
+            $scope.focuEdit = true;
         }
 
         $scope.add = function () {
             $scope.fields[0].value = '';
             $scope.categoria = {};
             $scope.status = 'edit';
+            $scope.focuEdit = true;
         }
 
         $scope.remove = function (id) {
@@ -64,6 +66,7 @@ gerqApp.controller('CategoriaController',['$scope', '$translate', 'CategoriaServ
             $scope.fields[0].value = '';
             $scope.categoria = {};
             $scope.getList();
+            $scope.focuPesquisa = true;
         }
 
         $scope.limpar();

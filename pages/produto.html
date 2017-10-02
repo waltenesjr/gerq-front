@@ -8,7 +8,7 @@
             <form>
                 <div class="form-group form-group-lg">
                     <div class="input-group">
-                        <input placeholder="{{'LABEL.PESQUISAR' | translate}}" ng-model="fields[0].value" class="form-control" id="descricao" name="descricao">
+                        <input focus-me="focuPesquisa" placeholder="{{'LABEL.PESQUISAR' | translate}}" ng-model="fields[0].value" class="form-control" id="descricao" name="descricao">
                         <span class="input-group-btn">
                             <button type="submit" ng-click="getList()" class="btn btn-primary btn-lg">
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -21,7 +21,11 @@
                 <thead>
                     <tr>
                         <th>{{'PRODUTO.CODIGO' | translate}}</th>
-                        <th>{{'PRODUTO.NOME' | translate}}</th>
+                        <th>
+                            <a style="color: white !important; text-decoration: none; cursor: pointer;" ng-click="onSort(0, 'p.nome');">{{'PRODUTO.NOME' | translate}}
+                                <span data-ng-class="{'glyphicon glyphicon-chevron-up' : orders[0].direction === 'asc', 'glyphicon glyphicon-chevron-down' : orders[0].direction === 'desc', 'glyphicon glyphicon-sort' : orders[0].direction === null}"></span>
+                            </a>
+                        </th>
                         <th>{{'PRODUTO.DATA_VENCIMENTO' | translate}}</th>
                         <th>{{'LABEL.ACOES' | translate}}</th>
                     </tr>
@@ -62,7 +66,7 @@
                             <div class="col-md-2">
                                 <label for="nome">{{'PRODUTO.CODIGO' | translate}}</label><br>
                                 <label ng-if="status == 'detail'" class="label-detail">{{ produto.codigo_servico }}</label>
-                                <input ng-model="produto.codigo_servico" class="form-control" id="codigo" name="codigo" ng-if="status == 'edit'">
+                                <input focus-me="focuEdit" ng-model="produto.codigo_servico" class="form-control" id="codigo" name="codigo" ng-if="status == 'edit'">
                             </div>
                             <div class="col-md-10">
                                 <label for="nome">{{'PRODUTO.NOME' | translate}}</label><br>

@@ -6,7 +6,7 @@
         <form name="categoriaForm">
             <div class="form-group form-group-lg">
                 <div class="input-group" ng-if="status == 'list'">
-                    <input placeholder="{{'LABEL.PESQUISAR' | translate}}" ng-model="fields[0].value" class="form-control" id="descricao" name="descricao">
+                    <input focus-me="focuPesquisa" placeholder="{{'LABEL.PESQUISAR' | translate}}" ng-model="fields[0].value" class="form-control" id="descricaoCat" name="descricaoCat">
                     <span class="input-group-btn">
                         <button ng-if="status == 'list'" ng-click="getList()" class="btn btn-primary btn-lg">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -15,7 +15,7 @@
                 </div>
                 <div class="form-group" ng-if="status == 'edit'">
                     <label>{{'CATEGORIA.DESCRICAO' | translate}}</label>
-                    <input ng-model="fields[0].value" class="form-control" id="descricao" name="descricao">
+                    <input focus-me="focuEdit" ng-model="fields[0].value" class="form-control" id="descricao" name="descricao">
                 </div>
                 <div style="text-align: right;" ng-if="status == 'edit'">
                     <hr>
