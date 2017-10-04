@@ -24,8 +24,8 @@ gerqApp.service('ProdutoService', ['ProdutoRepository', 'CategoriaService', 'Emp
             return CategoriaService.all();
         },
 
-        empresas: function () {
-            return EmpresaService.all();
+        getListSelect: function () {
+            return EmpresaService.getListSelect();
         },
 
         all: function () {

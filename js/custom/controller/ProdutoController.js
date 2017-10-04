@@ -133,7 +133,7 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         }
 
         function allEmpresas() {
-            ProdutoService.empresas().then(function (response) {
+            ProdutoService.getListSelect().then(function (response) {
                 $scope.empresas = response.plain();
             }, function errorCallback(response) {
                 error(response);

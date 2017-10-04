@@ -14,12 +14,16 @@ gerqApp.controller('CategoriaController',['$scope', '$translate', 'CategoriaServ
         };
 
         $scope.save = function () {
-            $scope.categoria.descricao = $scope.fields[0].value;
-            CategoriaService.save($scope.categoria).then(function () {
-                sucess();
-            }, function errorCallback(response) {
-                error(response);
-            });
+            if ($scope.fields[0].value){
+                $scope.categoria.descricao = $scope.fields[0].value;
+                CategoriaService.save($scope.categoria).then(function () {
+                    sucess();
+                }, function errorCallback(response) {
+                    error(response);
+                });
+            } else {
+                $scope.showMessageObrigatoriedade();
+            }
         };
 
         $scope.edit = function (categoria) {

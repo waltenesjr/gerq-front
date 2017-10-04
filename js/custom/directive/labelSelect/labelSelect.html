@@ -1,12 +1,20 @@
 <div ng-class="{'has-error': form[id].$error.required && (!form[id].$pristine || form.$submitted)}">
-    <label for="{{id}}" data-ng-class="{'obrigatorio' : obrigatorio}" data-ng-if='labelRender'>
-        <translate>{{label}}</translate><span>:</span>
+    <label
+        for="{{id}}"
+        ng-class="{'label-campo-obrigatorio': form[id].$error.required && (!form[id].$pristine || form.$submitted)}"
+        ng-if='labelRender'>
+        {{label | translate}}
         <i data-ng-if="labelInfoTooltipRender" class="glyphicon glyphicon-info-sign" uib-tooltip="{{labelInfoTooltip}}" tooltip-placement="top"></i>
         <!-- <i data-ng-if="labelQuestionTooltipRender" class="glyphicon glyphicon-question-sign" ui-tooltip="{{labelQuestionTooltip}}" tooltip-placement="top"></i> -->
     </label>
-
-	<select ng-multiple="true" class="form-control" name="{{id}}" id="{{id}}" ng-model="model" ng-options="{{options}} in lista {{trackBy}}"
-        ng-change="setChangeItem(model)" ng-disabled="disabled" ng-required="obrigatorio">
-    	<option value="">{{selecione}}</option>
+	<select
+        class="form-control"
+        name="{{id}}"
+        id="{{id}}"
+        ng-model="model"
+        ng-options="item.value as item.name for item in lista"
+        ng-disabled="disabled"
+        ng-required="obrigatorio">
+        <option value="">{{'LABEL.SELECIONE' | translate}}</option>
     </select>
 </div>

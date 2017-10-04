@@ -7,6 +7,7 @@ angular.module('app').directive("labelSelect", ["$translate", function ($transla
             id: "@ngId",
             label: "@ngLabel",
             obrigatorio: "=ngObrigatorio",
+            desc: "=ngDesc",
             disabled: "=ngDisabled",
             model: "=ngModel",
             form: "=form",
@@ -21,10 +22,8 @@ angular.module('app').directive("labelSelect", ["$translate", function ($transla
         },
         replace: true,
         restrict: 'E',
-        templateUrl: 'node_modules/arq-front/directive/labelSelect/labelSelect.html',
+        templateUrl: 'js/custom/directive/labelSelect/labelSelect.html',
         controller: ['$scope', '$element', '$attrs', function ($scope, $element, $attrs) {
-
-            $scope.selecione = $translate.instant('LABEL.SELECIONE');
 
             if ($scope.id === undefined) {
                 $scope.id = $attrs['ngModel'];

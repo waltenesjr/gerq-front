@@ -16,8 +16,8 @@ gerqApp.service('EmpresaService', ['EmpresaRepository',
             return EmpresaRepository.remove(id);
         },
 
-        all: function () {
-            return EmpresaRepository.all();
+        getListSelect: function () {
+            return EmpresaRepository.getListSelect();
         }
     };
     

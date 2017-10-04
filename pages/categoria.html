@@ -3,7 +3,7 @@
         <h2 class="panel-title"><strong>{{'CATEGORIA.CATEGORIAS' | translate}}</strong></h2>
     </div>
     <div class="panel-body">
-        <form name="categoriaForm">
+        <form name="categoriaForm" novalidate autocomplete="off">
             <div class="form-group form-group-lg">
                 <div class="input-group" ng-if="status == 'list'">
                     <input focus-me="focuPesquisa" placeholder="{{'LABEL.PESQUISAR' | translate}}" ng-model="fields[0].value" class="form-control" id="descricaoCat" name="descricaoCat">
@@ -14,12 +14,11 @@
                     </span>
                 </div>
                 <div class="form-group" ng-if="status == 'edit'">
-                    <label>{{'CATEGORIA.DESCRICAO' | translate}}</label>
-                    <input focus-me="focuEdit" ng-model="fields[0].value" class="form-control" id="descricao" name="descricao">
+                    <label-input form="categoriaForm" ng-focus-on="focuEdit" ng-model="fields[0].value" ng-obrigatorio="true" name="inputDesc" id="inputDesc" ng-label="CATEGORIA.DESCRICAO"></label-input>
                 </div>
                 <div style="text-align: right;" ng-if="status == 'edit'">
                     <hr>
-                    <button ng-click="save()" class="btn btn-primary btn-lg">
+                    <button type="submit" ng-click="save()" class="btn btn-primary btn-lg">
                         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{'LABEL.SALVAR' | translate}}
                     </button>
                     <a ng-click="limpar()" class="btn btn-primary btn-lg">

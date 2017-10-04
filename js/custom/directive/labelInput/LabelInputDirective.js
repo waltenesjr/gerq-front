@@ -12,6 +12,7 @@ angular.module('app').directive("labelInput", ["$translate", function($translate
 			mask : "=ngMask",
 			maxlength : "@ngCustomMaxlength",
 			form : "=form",
+            focusOn: "=ngFocusOn",
 			type : "@ngType",
 			eventoBlur : "&ngEventoBlur",
 			eventoChange : "&ngEventoChange",
@@ -26,7 +27,7 @@ angular.module('app').directive("labelInput", ["$translate", function($translate
 		},
 		replace : true,
 		restrict : 'E',
-		templateUrl : 'node_modules/arq-front/directive/labelInput/labelInput.html',
+		templateUrl : 'js/custom/directive/labelInput/labelInput.html',
 		controller: ['$scope', '$element', '$attrs', function($scope, $element, $attrs) {
 
 			if($scope.id === undefined){
