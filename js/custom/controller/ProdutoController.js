@@ -36,21 +36,20 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         };
 
         $scope.save = function () {
-            $scope.produto.perigos = $scope.perigos;
-            ProdutoService.save($scope.produto).then(function () {
-                sucess();
-            }, function errorCallback(response) {
-                error(response);
-            });
-        };
+            if (ProdutoService.validRequired($scope.produto)) {
+                $scope.produto.perigos = $scope.perigos;
+                ProdutoService.save($scope.produto).then(function () {
+                    sucess();
+                }, function errorCallback(response) {
+                    error(response);
+                });
+            } else {
+                $scope.showMessageObrigatoriedade();
+            }
+        }
 
         $scope.edit = function (id) {
-            $scope.focuEdit = true;
-            allCategorias();
-            allEmpresas();
-            $scope.perigos = [];
-            $scope.perigo = {};
-            $scope.status = 'edit';
+            initEdit();
             get(id);
         }
 
@@ -60,16 +59,11 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         }
 
         $scope.add = function () {
-            $scope.focuEdit = true;
-            allCategorias();
-            allEmpresas();
-            $scope.perigos = [];
-            $scope.perigo = {};
+            initEdit();
             $scope.produto = {
                 categoria: {},
                 empresa: {}
             };
-            $scope.status = 'edit';
         }
 
         $scope.addPerigo = function () {
@@ -92,15 +86,12 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
             });
         }
 
-        $scope.limpar = function () {
+        $scope.initList = function () {
             $scope.limparMensagemTela();
-            $scope.tab = 1;
-            $scope.status = 'list';
             $scope.pagination = {
                 currentPage: 1,
                 totalResults: 0,
-                limit: 5,
-                fields: angular.copy($scope.fields)
+                limit: 5
             };
             $scope.fields = [
                 {name: 'nome', value: null}
@@ -109,11 +100,21 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
                 {direction: null}
             ];
             $scope.sort = {};
-            $scope.getList();
             $scope.focuPesquisa = true;
+            $scope.status = 'list';
+            $scope.getList();
         }
 
-        $scope.limpar();
+        $scope.initList();
+
+        function initEdit() {
+            allCategorias();
+            allEmpresas();
+            $scope.perigos = [];
+            $scope.perigo = {};
+            $scope.status = 'edit';
+            $scope.focuEdit = true;
+        }
 
         function get(id) {
             ProdutoService.get(id).then(function (response) {
@@ -125,7 +126,7 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         }
 
         function allCategorias() {
-            ProdutoService.categorias().then(function (response) {
+            ProdutoService.getListSelectCategoria().then(function (response) {
                 $scope.categorias = response.plain();
             }, function errorCallback(response) {
                 error(response);
@@ -133,7 +134,7 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         }
 
         function allEmpresas() {
-            ProdutoService.getListSelect().then(function (response) {
+            ProdutoService.getListSelectEmpresa().then(function (response) {
                 $scope.empresas = response.plain();
             }, function errorCallback(response) {
                 error(response);
@@ -142,7 +143,7 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
 
         function sucess() {
             $scope.showMessageSuccess($translate.instant('MSG.MENSAGEM_M001'));
-            $scope.limpar();
+            $scope.initList();
         }
 
         function error(response) {

@@ -102,23 +102,19 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <label ng-if="status == 'detail'" class="label-detail">{{ produto.empresa.nome }}</label>
-                                    <label-select required ng-label="PRODUTO.EMPRESA" ng-obrigatorio="true" form="produtoForm" ng-model="produto.empresa.id" ng-list="empresas"></label-select>
+                                    <label-select ng-label="PRODUTO.EMPRESA" ng-obrigatorio="true" form="produtoForm" ng-model="produto.empresa.id" ng-list="empresas"></label-select>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="selectCategoria"><translate>{{'PRODUTO.CATEGORIA' | translate}}</label><br>
                                     <label ng-if="status == 'detail'" class="label-detail">{{ produto.categoria.descricao }}</label>
-                                    <select class="form-control dropdown-toggle" ng-model="produto.categoria.id" id="selectCategoria" name="selectCategoria"
-                                            ng-if="status == 'edit'" ng-options="categoria.id as categoria.descricao for categoria in categorias">
-                                        <option value="">{{'LABEL.SELECIONE' | translate}}</option>
-                                    </select>
+                                    <label-select ng-label="PRODUTO.CATEGORIA" ng-obrigatorio="true" form="produtoForm" ng-model="produto.categoria.id" ng-list="categorias"></label-select>
                                 </div>
                             </div><br ng-if="status == 'edit'">
                             <div class="row">
                                 <div class="col-md-4" ng-if="status == 'edit'">
-                                    <label-input-date ng-id="dataVencimento" ng-label="PRODUTO.DATA_VENCIMENTO" ng-obrigatorio="false" ng-model="produto.dataVencimento" form="produtoForm"/>
+                                    <label-input-date required ng-id="dataVencimento" ng-label="PRODUTO.DATA_VENCIMENTO" ng-obrigatorio="true" ng-model="produto.dataVencimento" form="produtoForm"/>
                                 </div>
                                 <div class="col-md-4" ng-if="status == 'detail'">
-                                    <label for="selectCategoria"><translate>{{'PRODUTO.DATA_VENCIMENTO' | translate}}</label><br>
+                                    <label>{{'PRODUTO.DATA_VENCIMENTO' | translate}}</label><br>
                                     <label class="label-detail">{{ produto.dataVencimento | date:"dd/MM/yyyy" }}</label>
                                 </div>
                             </div><br ng-if="status == 'edit'">
@@ -184,10 +180,10 @@
                 </uib-tabset>
                 <hr>
                 <div style="text-align: right">
-                    <button type="submit" ng-if="status == 'edit'" ng-click="save()" class="btn btn-primary btn-lg">
+                    <button ng-if="status == 'edit'" ng-click="save()" class="btn btn-primary btn-lg">
                         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span><strong> {{'LABEL.SALVAR' | translate}}</strong>
                     </button>
-                    <a ng-click="limpar()" class="btn btn-primary btn-lg">
+                    <a ng-click="initList()" class="btn btn-primary btn-lg">
                         <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span><strong> {{'LABEL.VOLTAR' | translate}}</strong>
                     </a>
                 </div>

@@ -16,8 +16,8 @@ gerqApp.service('CategoriaService', ['CategoriaRepository',
             return CategoriaRepository.remove(id);
         },
 
-        all: function () {
-            return CategoriaRepository.all();
+        getListSelect: function () {
+            return CategoriaRepository.getListSelect();
         }
     };
     

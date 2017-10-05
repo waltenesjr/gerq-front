@@ -20,11 +20,11 @@ gerqApp.service('ProdutoService', ['ProdutoRepository', 'CategoriaService', 'Emp
             return ProdutoRepository.remove(id);
         },
 
-        categorias: function () {
-            return CategoriaService.all();
+        getListSelectCategoria: function () {
+            return CategoriaService.getListSelect();
         },
 
-        getListSelect: function () {
+        getListSelectEmpresa: function () {
             return EmpresaService.getListSelect();
         },
 
@@ -34,7 +34,24 @@ gerqApp.service('ProdutoService', ['ProdutoRepository', 'CategoriaService', 'Emp
 
         findByname: function (name) {
             return ProdutoRepository.findByName(name);
+        },
+
+        validRequired : function (produto) {
+            var result = true;
+            if (produto){
+                if (!produto.codigoServico) {
+                  result = false;
+                } else if (!produto.nome) {
+                  result = false;
+                } else if (!produto.dataVencimento) {
+                  result = false;
+                } else {
+                  result = true;
+                }
+            } else {
+                result = false;
+            }
+            return result;
         }
     };
-    
 }]);

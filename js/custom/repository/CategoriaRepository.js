@@ -5,6 +5,10 @@ gerqApp.factory('CategoriaRepository', ['AbstractRepository', 'ServiceRestangula
 
         function CategoriaRepository() {
             AbstractRepository.call(this, ServiceRestangular, '/categoria');
+
+            this.getListSelect = function () {
+                return ServiceRestangular.one(this.route + '/getListSelect').get();
+            };
         }
 
         AbstractRepository.extend(CategoriaRepository);
