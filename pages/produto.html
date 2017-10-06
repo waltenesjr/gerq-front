@@ -1,29 +1,3 @@
-<style>
-    body {
-        padding: 15px;
-    }
-
-    .select2 > .select2-choice.ui-select-match {
-        /* Because of the inclusion of Bootstrap */
-        height: 29px;
-    }
-
-    .selectize-control > .selectize-dropdown {
-        top: 36px;
-    }
-    /* Some additional styling to demonstrate that append-to-body helps achieve the proper z-index layering. */
-    .select-box {
-        background: #fff;
-        position: relative;
-        z-index: 1;
-    }
-    .alert-info.positioned {
-        margin-top: 1em;
-        position: relative;
-        z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
-    }
-</style>
-
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h2 class="panel-title"><strong>{{'PRODUTO.PRODUTOS' | translate}}</strong></h2>
@@ -48,7 +22,7 @@
                     <tr>
                         <th>{{'PRODUTO.CODIGO' | translate}}</th>
                         <th>
-                            <a style="color: white !important; text-decoration: none; cursor: pointer;" ng-click="onSort(0, 'p.nome');">{{'PRODUTO.NOME' | translate}}
+                            <a style="color: white !important; text-decoration: none; cursor: pointer;" ng-click="onSort(0, 'nome');">{{'PRODUTO.NOME' | translate}}
                                 <span data-ng-class="{'glyphicon glyphicon-chevron-up' : orders[0].direction === 'asc', 'glyphicon glyphicon-chevron-down' : orders[0].direction === 'desc', 'glyphicon glyphicon-sort' : orders[0].direction === null}"></span>
                             </a>
                         </th>
@@ -121,7 +95,7 @@
                             <div class="row">
                                 <div class="col-md-4" ng-if="status == 'edit'">
                                     <label>{{'PRODUTO.CORROSIVO' |  translate}}
-                                        <input id="checkCorrosivo" name="checkCorrosivo" type="checkbox" value="true" ng-model="produto.corrosivo">
+                                        <input required id="checkCorrosivo" name="checkCorrosivo" type="checkbox" value="true" ng-model="produto.corrosivo">
                                     </label>
                                 </div>
                                 <div class="col-md-4" ng-if="status == 'detail'">
