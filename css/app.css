@@ -6,6 +6,12 @@ hr {
     border-top: 1px solid #337ab7 !important;
 }
 
+.column-sort {
+    color: white !important;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .label-campo-obrigatorio {
     color: #a94442 !important;
 }

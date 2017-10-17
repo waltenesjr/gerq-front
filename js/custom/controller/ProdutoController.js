@@ -1,6 +1,6 @@
 'use strict';
-gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService',
-    function ($scope, $translate, ProdutoService) {
+gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService', '$timeout',
+    function ($scope, $translate, ProdutoService, $timeout) {
 
         $scope.getList = function () {
             $scope.pagination.sort = angular.copy($scope.sort);
@@ -36,7 +36,8 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         };
 
         $scope.save = function () {
-            if (ProdutoService.validRequired($scope.produto)) {
+            var result = ProdutoService.validRequired($scope.produto);
+            if (null == result) {
                 $scope.produto.perigos = $scope.perigos;
                 ProdutoService.save($scope.produto).then(function () {
                     sucess();
@@ -44,8 +45,13 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
                     error(response);
                 });
             } else {
+                $scope.setTab(result)
                 $scope.showMessageObrigatoriedade();
             }
+        }
+
+        $scope.setTab = function (tab) {
+            $scope.activeTab = tab;
         }
 
         $scope.edit = function (id) {

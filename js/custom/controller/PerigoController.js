@@ -7,5 +7,6 @@ gerqApp.controller('PerigoController',['$scope', '$translate', 'PerigoService', 
         $scope.findByname = function (name) {
             return ProdutoService.findByname(name);
         }
+        $scope.focuPesquisa = true;
 }]);
 

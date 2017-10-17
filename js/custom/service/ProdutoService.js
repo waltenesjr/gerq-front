@@ -37,19 +37,11 @@ gerqApp.service('ProdutoService', ['ProdutoRepository', 'CategoriaService', 'Emp
         },
 
         validRequired : function (produto) {
-            var result = true;
+            var result = null;
             if (produto){
-                if (!produto.codigoServico) {
-                  result = false;
-                } else if (!produto.nome) {
-                  result = false;
-                } else if (!produto.dataVencimento) {
-                  result = false;
-                } else {
-                  result = true;
+                if (!produto.codigoServico || !produto.nome || !produto.dataVencimento) {
+                  result = 0;
                 }
-            } else {
-                result = false;
             }
             return result;
         }

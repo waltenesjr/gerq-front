@@ -16,13 +16,13 @@
                         </span>
                     </div>
                 </div>
-            </form>
+            </form><br>
             <table ng-if="produtos.length > 0" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>{{'PRODUTO.CODIGO' | translate}}</th>
                         <th>
-                            <a style="color: white !important; text-decoration: none; cursor: pointer;" ng-click="onSort(0, 'nome');">{{'PRODUTO.NOME' | translate}}
+                            <a class="column-sort" ng-click="onSort(0, 'nome');">{{'PRODUTO.NOME' | translate}}
                                 <span data-ng-class="{'glyphicon glyphicon-chevron-up' : orders[0].direction === 'asc', 'glyphicon glyphicon-chevron-down' : orders[0].direction === 'desc', 'glyphicon glyphicon-sort' : orders[0].direction === null}"></span>
                             </a>
                         </th>
@@ -51,109 +51,106 @@
             </table>
             <dir-pagination-controls ng-if="produtos.length > 0" max-size="5" boundary-links="true" on-page-change="getList()"></dir-pagination-controls>
             <hr>
-            <div style="text-align: right">
+            <div class="text-right">
                 <a ng-click="add()" class="btn btn-primary btn-lg">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><strong> {{'LABEL.NOVO' | translate}}</strong>
                 </a>
             </div>
         </div>
         <!-- Form -->
-        <div ng-if="status == 'edit' || status == 'detail'">
+        <div ng-if="status == 'edit' || status == 'detail'" class="form-group form-group-lg">
             <form name="produtoForm" novalidate autocomplete="off">
-                <uib-tabset active="activeForm">
-                    <uib-tab index="0" heading="Identificação"><br>
-                        <div class="form-group form-group-lg">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label ng-if="status == 'detail'" class="label-detail">{{ produto.codigoServico }}</label>
-                                    <label-input ng-if="status == 'edit'" form="produtoForm" ng-focus-on="focuEdit" ng-model="produto.codigoServico" ng-obrigatorio="true" name="inputCod" id="inputCod" ng-label="PRODUTO.CODIGO"></label-input>
-                                </div>
-                                <div class="col-md-10">
-                                    <label ng-if="status == 'detail'" class="label-detail">{{ produto.nome }}</label>
-                                    <label-input ng-if="status == 'edit'" form="produtoForm" ng-model="produto.nome" ng-obrigatorio="true" name="inputNome" id="inputNome" ng-label="PRODUTO.NOME"></label-input>
-                                </div>
-                            </div><br ng-if="status == 'edit'">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <label ng-if="status == 'detail'" class="label-detail">{{ produto.empresa.nome }}</label>
-                                    <label-select ng-label="PRODUTO.EMPRESA" ng-obrigatorio="true" form="produtoForm" ng-model="produto.empresa.id" ng-list="empresas"></label-select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label ng-if="status == 'detail'" class="label-detail">{{ produto.categoria.descricao }}</label>
-                                    <label-select ng-label="PRODUTO.CATEGORIA" ng-obrigatorio="true" form="produtoForm" ng-model="produto.categoria.id" ng-list="categorias"></label-select>
-                                </div>
-                            </div><br ng-if="status == 'edit'">
-                            <div class="row">
-                                <div class="col-md-4" ng-if="status == 'edit'">
-                                    <label-input-date required ng-id="dataVencimento" ng-label="PRODUTO.DATA_VENCIMENTO" ng-obrigatorio="true" ng-model="produto.dataVencimento" form="produtoForm"/>
-                                </div>
-                                <div class="col-md-4" ng-if="status == 'detail'">
-                                    <label>{{'PRODUTO.DATA_VENCIMENTO' | translate}}</label><br>
-                                    <label class="label-detail">{{ produto.dataVencimento | date:"dd/MM/yyyy" }}</label>
-                                </div>
-                            </div><br ng-if="status == 'edit'">
-                            <div class="row">
-                                <div class="col-md-4" ng-if="status == 'edit'">
-                                    <label>{{'PRODUTO.CORROSIVO' |  translate}}
-                                        <input required id="checkCorrosivo" name="checkCorrosivo" type="checkbox" value="true" ng-model="produto.corrosivo">
-                                    </label>
-                                </div>
-                                <div class="col-md-4" ng-if="status == 'detail'">
-                                    <label>{{'PRODUTO.CORROSIVO' |  translate}}</label><br>
-                                    <label class="label-detail">{{ produto.corrosivo ? ('LABEL.SIM' | translate) : ('LABEL.NAO' | translate) }}</label>
-                                </div>
+                <uib-tabset>
+                    <uib-tab active="activeTab == 0" heading="Identificação" ng-click="setTab(0)"><br>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label ng-if="status == 'detail'" class="label-detail">{{ produto.codigoServico }}</label>
+                                <label-input ng-if="status == 'edit'" form="produtoForm" ng-focus-on="focuEdit" ng-model="produto.codigoServico" ng-obrigatorio="true" name="inputCod" id="inputCod" ng-label="PRODUTO.CODIGO"></label-input>
+                            </div>
+                            <div class="col-md-10">
+                                <label ng-if="status == 'detail'" class="label-detail">{{ produto.nome }}</label>
+                                <label-input ng-if="status == 'edit'" form="produtoForm" ng-model="produto.nome" ng-obrigatorio="true" name="inputNome" id="inputNome" ng-label="PRODUTO.NOME"></label-input>
+                            </div>
+                        </div><br ng-if="status == 'edit'">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label ng-if="status == 'detail'" class="label-detail">{{ produto.empresa.nome }}</label>
+                                <label-select ng-label="PRODUTO.EMPRESA" ng-obrigatorio="true" form="produtoForm" ng-model="produto.empresa.id" ng-list="empresas"></label-select>
+                            </div>
+                            <div class="col-md-4">
+                                <label ng-if="status == 'detail'" class="label-detail">{{ produto.categoria.descricao }}</label>
+                                <label-select ng-label="PRODUTO.CATEGORIA" ng-obrigatorio="true" form="produtoForm" ng-model="produto.categoria.id" ng-list="categorias"></label-select>
+                            </div>
+                        </div><br ng-if="status == 'edit'">
+                        <div class="row">
+                            <div class="col-md-4" ng-if="status == 'edit'">
+                                <label-input-date required ng-id="dataVencimento" ng-label="PRODUTO.DATA_VENCIMENTO" ng-obrigatorio="true" ng-model="produto.dataVencimento" form="produtoForm"/>
+                            </div>
+                            <div class="col-md-4" ng-if="status == 'detail'">
+                                <label>{{'PRODUTO.DATA_VENCIMENTO' | translate}}</label><br>
+                                <label class="label-detail">{{ produto.dataVencimento | date:"dd/MM/yyyy" }}</label>
+                            </div>
+                        </div><br ng-if="status == 'edit'">
+                        <div class="row">
+                            <div class="col-md-4" ng-if="status == 'edit'">
+                                <label>{{'PRODUTO.CORROSIVO' |  translate}}
+                                    <input required id="checkCorrosivo" name="checkCorrosivo" type="checkbox" value="true" ng-model="produto.corrosivo">
+                                </label>
+                            </div>
+                            <div class="col-md-4" ng-if="status == 'detail'">
+                                <label>{{'PRODUTO.CORROSIVO' |  translate}}</label><br>
+                                <label class="label-detail">{{ produto.corrosivo ? ('LABEL.SIM' | translate) : ('LABEL.NAO' | translate) }}</label>
                             </div>
                         </div>
                     </uib-tab>
-                    <uib-tab index="1" heading="{{'PERIGO.PERIGO' | translate}}"><br>
-                            <div class="form-group form-group-lg">
-                                <div class="form-group">
-                                    <label>{{'PERIGO.TITULO' | translate}}</label>
-                                    <input ng-model="perigo.titulo" class="form-control" id="titulo" name="titulo">
-                                </div>
-                                <div class="form-group">
-                                    <label>{{'PERIGO.DESCRICAO' | translate}}</label>
-                                    <input ng-model="perigo.descricao" class="form-control" id="descricao" name="descricao">
-                                </div>
-                                <div style="text-align: right;">
-                                    <hr>
-                                    <button ng-click="addPerigo()" class="btn btn-primary btn-lg">
-                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{'LABEL.ADICIONAR' | translate}}
-                                    </button>
-                                </div><br>
-                                <table class="table table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>{{'PERIGO.TITULO' | translate}}</th>
-                                        <th>{{'PERIGO.DESCRICAO' | translate}}</th>
-                                        <th>{{'LABEL.ACOES' | translate}}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr dir-paginate="perigo in perigos|itemsPerPage:pagination.limit">
-                                        <td width="30%">{{ perigo.titulo }}</td>
-                                        <td>{{ perigo.descricao }}</td>
-                                        <td width="10%" class="text-center">
-                                            <button class="btn btn-primary">
-                                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                            </button>
-                                            <button class="btn btn-primary">
-                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <dir-pagination-controls on-page-change="getList()" boundary-links="true"></dir-pagination-controls>
+                    <uib-tab active="activeTab == 1" heading="{{'PERIGO.PERIGO' | translate}}" ng-click="setTab(1)"><br>
+                            <div class="form-group">
+                                <label>{{'PERIGO.TITULO' | translate}}</label>
+                                <input ng-model="perigo.titulo" class="form-control" id="titulo" name="titulo">
+                            </div>
+                            <div class="form-group">
+                                <label>{{'PERIGO.DESCRICAO' | translate}}</label>
+                                <input ng-model="perigo.descricao" class="form-control" id="descricao" name="descricao">
+                            </div>
+                            <div style="text-align: right;">
+                                <hr>
+                                <button ng-click="addPerigo()" class="btn btn-primary btn-lg">
+                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{'LABEL.ADICIONAR' | translate}}
+                                </button>
                             </div><br>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>{{'PERIGO.TITULO' | translate}}</th>
+                                    <th>{{'PERIGO.DESCRICAO' | translate}}</th>
+                                    <th>{{'LABEL.ACOES' | translate}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr dir-paginate="perigo in perigos|itemsPerPage:pagination.limit">
+                                    <td width="30%">{{ perigo.titulo }}</td>
+                                    <td>{{ perigo.descricao }}</td>
+                                    <td width="10%" class="text-center">
+                                        <button class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        </button>
+                                        <button class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <dir-pagination-controls on-page-change="getList()" boundary-links="true"></dir-pagination-controls>
+                            <br>
                     </uib-tab>
-                    <uib-tab index="2" heading="Ingredientes"><br>
+                    <uib-tab active="activeTab == 2" heading="Ingredientes" ng-click="setTab(2)"><br>
 
 
                     </uib-tab>
                 </uib-tabset>
                 <hr>
-                <div style="text-align: right">
+                <div class="text-right">
                     <button ng-if="status == 'edit'" ng-click="save()" class="btn btn-primary btn-lg">
                         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span><strong> {{'LABEL.SALVAR' | translate}}</strong>
                     </button>
@@ -162,6 +159,7 @@
                     </a>
                 </div>
             </form>
+            <div ng-footter style="float: left;"/>
         </div>
     </div>
 </div>

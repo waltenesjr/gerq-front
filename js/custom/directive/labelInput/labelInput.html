@@ -1,15 +1,18 @@
 <div ng-class="{'has-error': (form[id].$error.required || form[id].$error.regexValidate) && (!form[id].$pristine || form.$submitted)}"\>
-    <label
-        for="{{id}}"
-        ng-class="{'label-campo-obrigatorio': (form[id].$error.required || form[id].$error.regexValidate) && (!form[id].$pristine || form.$submitted)}"
-        ng-if="labelRender">
-        {{label | translate}}
-        <!--<i ng-if="obrigatorio" ng-show="form[id].$error.required && (!form[id].$pristine || form.$submitted)" class='fa fa-warning red' uib-tooltip="{{labelAlertTooltipCopy}}" tooltip-placement="top"></i>-->
-        <i ng-if="validacaoRegex" ng-show="form[id].$error.regexValidate && (!form[id].$pristine || form.$submitted)" class="fa fa-warning red" uib-tooltip="{{invalidRegex}}" tooltip-placement="top"></i>
-        <i ng-show="form[id].$error.email && (!form[id].$pristine || form.$pristine)" class="fa fa-warning red" uib-tooltip="{{invalidEmailTooltip}}" tooltip-placement="top"></i>
-        <i ng-if="labelInfoTooltipRender" class="fa fa-info-circle blue" uib-tooltip="{{labelInfoTooltipMsg}}" tooltip-placement="top"></i>
-        <!--<i ng-if='labelQuestionTooltipRender' class='fa fa-question-circle green' uib-tooltip='{{labelQuestionTooltip}}' tooltip-placement='top'></i>-->
-    </label>
+    <div>
+        <span ng-if="obrigatorio" style="color: red !important;">*</span>
+        <label
+            for="{{id}}"
+            ng-class="{'label-campo-obrigatorio': (form[id].$error.required || form[id].$error.regexValidate) && (!form[id].$pristine || form.$submitted)}"
+            ng-if="labelRender">
+            {{label | translate}}
+            <!--<i ng-if="obrigatorio" ng-show="form[id].$error.required && (!form[id].$pristine || form.$submitted)" class='fa fa-warning red' uib-tooltip="{{labelAlertTooltipCopy}}" tooltip-placement="top"></i>-->
+            <i ng-if="validacaoRegex" ng-show="form[id].$error.regexValidate && (!form[id].$pristine || form.$submitted)" class="fa fa-warning red" uib-tooltip="{{invalidRegex}}" tooltip-placement="top"></i>
+            <i ng-show="form[id].$error.email && (!form[id].$pristine || form.$pristine)" class="fa fa-warning red" uib-tooltip="{{invalidEmailTooltip}}" tooltip-placement="top"></i>
+            <i ng-if="labelInfoTooltipRender" class="fa fa-info-circle blue" uib-tooltip="{{labelInfoTooltipMsg}}" tooltip-placement="top"></i>
+            <!--<i ng-if='labelQuestionTooltipRender' class='fa fa-question-circle green' uib-tooltip='{{labelQuestionTooltip}}' tooltip-placement='top'></i>-->
+        </label>
+    </div>
  	<input
         type="{{type}}"
         ng-trim="{{trim}}"

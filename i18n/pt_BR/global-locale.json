@@ -79,7 +79,8 @@
     "MENSAGEM_M004_CAMPOS": " válido(a).",
     "MENSAGEM_M005": "Início da Data de Exibição maior que o Término da Data de Exibição. Informe o Início da Data de Exibição menor que o Término da Data de Exibição.",
     "MENSAGEM_M006": "Nenhum registro encontrado para esta pesquisa. Informar outros parâmetros de pesquisa.",
-    "MENSAGEM_M0012": "Nenhum documento foi adicionado. Incluir pelo menos um documento."
+    "MENSAGEM_M0012": "Nenhum documento foi adicionado. Incluir pelo menos um documento.",
+    "MENSAGEM_CAMPO_OBRIGATORIO": "Campo(s) obrigatório(s)"
   },
 
   "MSG": {

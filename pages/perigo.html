@@ -5,6 +5,7 @@
     <div class="panel-body">
         <form id="autoCompleteForm" autocomplete="off">
             <auto-complete
+                ng-focus-on="focuPesquisa"
                 ng-find="findByname(value)"
                 propriedades="['nome']"
                 ng-id="idProduto"
@@ -16,7 +17,7 @@
                 form="autoCompleteForm"
                 ng-set-result="setProduto(item)">
             </auto-complete>
-        </form>
+        </form><br>
         <div ng-repeat="perigo in perigos">
             <div class="panel panel-danger">
                 <div class="panel-heading"><strong>{{ perigo.titulo }}</strong></div>

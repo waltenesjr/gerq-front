@@ -1,12 +1,15 @@
 <div ng-class="{'has-error': form[id].$error.required && (!form[id].$pristine || form.$submitted) || removeInternalControl.dataInvalida}">
-	<label
-		for="{{id}}"
-		ng-class="{'label-campo-obrigatorio' : form[id].$error.required && (!form[id].$pristine || form.$submitted) || removeInternalControl.dataInvalida}"
-		ng-if='labelRender'>
-		{{label | translate}}
-		<i ng-if="labelInfoTooltipRender" class="glyphicon glyphicon-info-sign" uib-tooltip="{{labelInfoTooltip}}" tooltip-placement="top"></i>
-		<!-- <i data-ng-if="labelQuestionTooltipRender" class="glyphicon glyphicon-question-sign" ui-tooltip="{{labelQuestionTooltip}}" tooltip-placement="top"></i> -->
-	</label>
+	<div>
+		<span ng-if="obrigatorio" style="color: red !important;">*</span>
+		<label
+			for="{{id}}"
+			ng-class="{'label-campo-obrigatorio' : form[id].$error.required && (!form[id].$pristine || form.$submitted) || removeInternalControl.dataInvalida}"
+			ng-if='labelRender'>
+			{{label | translate}}
+			<i ng-if="labelInfoTooltipRender" class="glyphicon glyphicon-info-sign" uib-tooltip="{{labelInfoTooltip}}" tooltip-placement="top"></i>
+			<!-- <i data-ng-if="labelQuestionTooltipRender" class="glyphicon glyphicon-question-sign" ui-tooltip="{{labelQuestionTooltip}}" tooltip-placement="top"></i> -->
+		</label>
+	</div>
 	<div class="input-group">
 		<input
 			class="form-control"
