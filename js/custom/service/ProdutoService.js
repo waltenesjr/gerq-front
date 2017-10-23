@@ -38,10 +38,10 @@ gerqApp.service('ProdutoService', ['ProdutoRepository', 'CategoriaService', 'Emp
 
         validRequired : function (produto) {
             var result = null;
-            if (produto){
-                if (!produto.codigoServico || !produto.nome || !produto.dataVencimento) {
-                  result = 0;
-                }
+            if (!produto.codigoServico || !produto.nome || !produto.dataVencimento) {
+                result = 'identificacao';
+            } else if (produto.perigos.length <= 0) {
+                result = 'perigo';
             }
             return result;
         }

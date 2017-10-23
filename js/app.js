@@ -19,8 +19,7 @@ var gerqAppDependencies = [
     'restangular',
     'toastr',
     'ui.bootstrap.datetimepicker',
-    'angularUtils.directives.dirPagination',
-    'ui.select'
+    'angularUtils.directives.dirPagination'
 ];
 
 var gerqApp = angular.module("app", gerqAppDependencies);

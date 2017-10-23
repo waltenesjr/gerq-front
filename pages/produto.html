@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </form><br>
-            <table ng-if="produtos.length > 0" class="table table-bordered table-hover">
+            <table ng-if="pagination.list.length > 0" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>{{'PRODUTO.CODIGO' | translate}}</th>
@@ -31,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr dir-paginate="produto in produtos|itemsPerPage:pagination.limit" total-items="pagination.totalResults" current-page="pagination.currentPage">
+                    <tr dir-paginate="produto in pagination.list|itemsPerPage:pagination.limit" total-items="pagination.totalResults" current-page="pagination.currentPage">
                         <td width="5%">{{ produto.codigoServico }}</td>
                         <td>{{ produto.nome }}</td>
                         <td width="15%">{{ produto.dataVencimento | date:"dd/MM/yyyy" }}</td>
@@ -49,7 +49,7 @@
                     </tr>
                 </tbody>
             </table>
-            <dir-pagination-controls ng-if="produtos.length > 0" max-size="5" boundary-links="true" on-page-change="getList()"></dir-pagination-controls>
+            <dir-pagination-controls ng-if="pagination.list.length > 0" max-size="5" boundary-links="true" on-page-change="getList()"></dir-pagination-controls>
             <hr>
             <div class="text-right">
                 <a ng-click="add()" class="btn btn-primary btn-lg">
@@ -60,8 +60,13 @@
         <!-- Form -->
         <div ng-if="status == 'edit' || status == 'detail'" class="form-group form-group-lg">
             <form name="produtoForm" novalidate autocomplete="off">
-                <uib-tabset>
-                    <uib-tab active="activeTab == 0" heading="Identificação" ng-click="setTab(0)"><br>
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="active"><a href="#identificacao" aria-controls="identificacao" role="tab" data-toggle="tab">Identificação</a></li>
+                    <li role="presentation"><a href="#perigo" aria-controls="perigo" role="tab" data-toggle="tab">{{'PERIGO.PERIGO' | translate}}</a></li>
+                </ul><br>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="identificacao">
                         <div class="row">
                             <div class="col-md-2">
                                 <label ng-if="status == 'detail'" class="label-detail">{{ produto.codigoServico }}</label>
@@ -102,31 +107,30 @@
                                 <label class="label-detail">{{ produto.corrosivo ? ('LABEL.SIM' | translate) : ('LABEL.NAO' | translate) }}</label>
                             </div>
                         </div>
-                    </uib-tab>
-                    <uib-tab active="activeTab == 1" heading="{{'PERIGO.PERIGO' | translate}}" ng-click="setTab(1)"><br>
-                            <div class="form-group">
-                                <label>{{'PERIGO.TITULO' | translate}}</label>
-                                <input ng-model="perigo.titulo" class="form-control" id="titulo" name="titulo">
-                            </div>
-                            <div class="form-group">
-                                <label>{{'PERIGO.DESCRICAO' | translate}}</label>
-                                <input ng-model="perigo.descricao" class="form-control" id="descricao" name="descricao">
-                            </div>
-                            <div style="text-align: right;">
-                                <hr>
-                                <button ng-click="addPerigo()" class="btn btn-primary btn-lg">
-                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{'LABEL.ADICIONAR' | translate}}
-                                </button>
-                            </div><br>
-                            <table class="table table-bordered table-hover">
-                                <thead>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane fade" id="perigo">
+                        <div class="form-group">
+                            <label-input ng-if="status == 'edit'" form="perigoForm" ng-model="perigo.titulo" ng-obrigatorio="true" name="inputPerTitle" id="inputPerTitle" ng-label="PERIGO.TITULO"></label-input>
+                        </div>
+                        <div class="form-group">
+                            <label-input ng-if="status == 'edit'" form="perigoForm" ng-model="perigo.descricao" ng-obrigatorio="true" name="inputPerDesc" id="inputPerDesc" ng-label="PERIGO.DESCRICAO"></label-input>
+                        </div>
+                        <div style="text-align: right;">
+                            <hr>
+                            <button ng-click="addPerigo()" class="btn btn-primary btn-lg">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {{'LABEL.ADICIONAR' | translate}}
+                            </button>
+                        </div><br>
+                        <table ng-show="perigos.length > 0" class="table table-bordered table-hover">
+                            <thead>
                                 <tr>
                                     <th>{{'PERIGO.TITULO' | translate}}</th>
                                     <th>{{'PERIGO.DESCRICAO' | translate}}</th>
                                     <th>{{'LABEL.ACOES' | translate}}</th>
                                 </tr>
-                                </thead>
-                                <tbody>
+                            </thead>
+                            <tbody>
                                 <tr dir-paginate="perigo in perigos|itemsPerPage:pagination.limit">
                                     <td width="30%">{{ perigo.titulo }}</td>
                                     <td>{{ perigo.descricao }}</td>
@@ -134,21 +138,16 @@
                                         <button class="btn btn-primary">
                                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                         </button>
-                                        <button class="btn btn-primary">
+                                        <button class="btn btn-primary" ng-click="removePerigo($index)">
                                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                         </button>
                                     </td>
                                 </tr>
-                                </tbody>
-                            </table>
-                            <dir-pagination-controls on-page-change="getList()" boundary-links="true"></dir-pagination-controls>
-                            <br>
-                    </uib-tab>
-                    <uib-tab active="activeTab == 2" heading="Ingredientes" ng-click="setTab(2)"><br>
-
-
-                    </uib-tab>
-                </uib-tabset>
+                            </tbody>
+                        </table>
+                        <dir-pagination-controls on-page-change="getList()" boundary-links="true"></dir-pagination-controls>
+                    </div>
+                </div>
                 <hr>
                 <div class="text-right">
                     <button ng-if="status == 'edit'" ng-click="save()" class="btn btn-primary btn-lg">

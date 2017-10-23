@@ -33,6 +33,7 @@ angular.module('app').directive("labelInput", ["$translate", function($translate
 			if($scope.id === undefined){
 				$scope.id = $attrs['ngModel'];
 			}
+
 			$scope.validacaoRegex = $scope.regex ? true : false;
 
 			$scope.invalidRegex = $translate.instant($scope.label) + ' ' + $translate.instant('LABEL.NAO_ATENDE_REGEX');

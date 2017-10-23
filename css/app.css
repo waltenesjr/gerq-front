@@ -88,3 +88,16 @@ hr {
     font-weight: bold;
 }
 
+#rodape {
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    background-color: #337ab7;
+    border-top: 1px solid white;
+    text-align: center;
+    font-family: Arial, Tahoma, Verdana;
+    font-size: 8pt;
+    padding: 5px 5px 5px 5px;
+    color: white;
+}
+

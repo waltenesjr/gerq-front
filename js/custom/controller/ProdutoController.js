@@ -5,10 +5,9 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         $scope.getList = function () {
             $scope.pagination.sort = angular.copy($scope.sort);
             $scope.pagination.fields = angular.copy($scope.fields);
+            $scope.pagination.list = null;
             ProdutoService.list($scope.pagination).then(function (response) {
-                var dados = response.plain();
-                $scope.produtos = dados.list;
-                $scope.pagination.totalResults = dados.totalResults;
+                $scope.pagination = response.plain();
             }, function errorCallback(response) {
                 error(response);
             });
@@ -36,22 +35,27 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         };
 
         $scope.save = function () {
-            var result = ProdutoService.validRequired($scope.produto);
-            if (null == result) {
-                $scope.produto.perigos = $scope.perigos;
+            $scope.produto.perigos = $scope.perigos;
+            var tab = ProdutoService.validRequired($scope.produto);
+            if (null == tab) {
                 ProdutoService.save($scope.produto).then(function () {
                     sucess();
                 }, function errorCallback(response) {
                     error(response);
                 });
             } else {
-                $scope.setTab(result)
-                $scope.showMessageObrigatoriedade();
+                $scope.setTab(tab);
+                if (tab == 'identificacao') {
+                    $scope.showMessageObrigatoriedade();
+                } else if (tab == 'perigo') {
+                    $scope.showMessageError('Adicione pelo menos um perigo.')
+                }
+
             }
         }
 
         $scope.setTab = function (tab) {
-            $scope.activeTab = tab;
+            activaTab(tab);
         }
 
         $scope.edit = function (id) {
@@ -73,8 +77,16 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         }
 
         $scope.addPerigo = function () {
-            $scope.perigos.push($scope.perigo);
-            $scope.perigo = {};
+            if ($scope.perigo.titulo || $scope.perigo.descricao) {
+                $scope.perigos.push($scope.perigo);
+                $scope.perigo = {};
+            } else {
+                $scope.showMessageObrigatoriedade();
+            }
+        }
+
+        $scope.removePerigo = function (index) {
+            $scope.perigos.splice(index, 1);
         }
 
         $scope.remove = function (id) {

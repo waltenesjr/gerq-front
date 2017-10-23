@@ -143,3 +143,7 @@ function getScopeBody() {
 var goFocus = function (target) {
     document.getElementById(target).focus();
 };
+
+function activaTab(tab){
+    $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+};
