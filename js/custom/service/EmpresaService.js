@@ -18,6 +18,14 @@ gerqApp.service('EmpresaService', ['EmpresaRepository',
 
         getListSelect: function () {
             return EmpresaRepository.getListSelect();
+        },
+
+        validationRequired : function (empresa) {
+            var result = true;
+            if (!empresa.nome || !empresa.area) {
+                result = false;
+            }
+            return result;
         }
     };
     

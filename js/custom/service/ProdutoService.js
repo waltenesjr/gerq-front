@@ -36,7 +36,7 @@ gerqApp.service('ProdutoService', ['ProdutoRepository', 'CategoriaService', 'Emp
             return ProdutoRepository.findByName(name);
         },
 
-        validRequired : function (produto) {
+        validationRequired : function (produto) {
             var result = null;
             if (!produto.codigoServico || !produto.nome || !produto.dataVencimento) {
                 result = 'identificacao';

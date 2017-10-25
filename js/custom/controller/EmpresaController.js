@@ -14,22 +14,28 @@ gerqApp.controller('EmpresaController',['$scope', '$translate', 'EmpresaService'
         };
 
         $scope.save = function () {
-            EmpresaService.save($scope.empresa).then(function () {
-                sucess();
-            }, function errorCallback(response) {
-                error(response);
-            });
+            if (EmpresaService.validationRequired($scope.empresa)) {
+                EmpresaService.save($scope.empresa).then(function () {
+                    sucess();
+                }, function errorCallback(response) {
+                    error(response);
+                });
+            } else {
+                $scope.showMessageObrigatoriedade();
+            }
         };
 
         $scope.edit = function (empresa) {
             $scope.empresa = empresa;
             $scope.status = 'edit';
+            clearForm();
         }
 
         $scope.add = function () {
             $scope.fields[0].value = '';
             $scope.empresa = {};
             $scope.status = 'edit';
+            clearForm();
         }
 
         $scope.remove = function (id) {
@@ -53,18 +59,23 @@ gerqApp.controller('EmpresaController',['$scope', '$translate', 'EmpresaService'
             $scope.pagination = {
                 currentPage: 1,
                 totalResults: 0,
-                limit: 5,
-                fields: angular.copy($scope.fields)
+                limit: 5
             };
             $scope.fields = [
                 {name: 'nome', value: null}
             ];
             $scope.fields[0].value = '';
             $scope.empresa = {};
+            $scope.focuPesquisa = true;
             $scope.getList();
         }
 
         $scope.limpar();
+
+        function clearForm() {
+            $scope.empresaForm.$submitted = false;
+            $scope.empresaForm.$setPristine();
+        }
 
         function sucess() {
             $scope.showMessageSuccess($translate.instant('MSG.MENSAGEM_M001'));

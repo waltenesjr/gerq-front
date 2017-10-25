@@ -1,6 +1,6 @@
 <div ng-class="{'has-error': form[id].$error.required && (!form[id].$pristine || form.$submitted) || removeInternalControl.dataInvalida}">
 	<div>
-		<span ng-if="obrigatorio" style="color: red !important;">*</span>
+		<span ng-if="obrigatorio" class="red">*</span>
 		<label
 			for="{{id}}"
 			ng-class="{'label-campo-obrigatorio' : form[id].$error.required && (!form[id].$pristine || form.$submitted) || removeInternalControl.dataInvalida}"
@@ -28,6 +28,7 @@
 			is-open="opened" min-date="minDate"
 			max-date="maxDate"
 			focus-me="focusOn"
+			placeholder="{{placeholder}}"
 			close-text="{{'LABEL.FECHAR' | translate}}"
 			current-text="{{'LABEL.HOJE' | translate}}"
 			clear-text="{{'LABEL.LIMPAR' | translate}}"/>

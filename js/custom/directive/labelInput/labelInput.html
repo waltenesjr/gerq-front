@@ -1,6 +1,6 @@
 <div ng-class="{'has-error': (form[id].$error.required || form[id].$error.regexValidate) && (!form[id].$pristine || form.$submitted)}"\>
     <div>
-        <span ng-if="obrigatorio" style="color: red !important;">*</span>
+        <span ng-if="obrigatorio" class="red">*</span>
         <label
             for="{{id}}"
             ng-class="{'label-campo-obrigatorio': (form[id].$error.required || form[id].$error.regexValidate) && (!form[id].$pristine || form.$submitted)}"
@@ -24,7 +24,7 @@
         maxlength="{{maxlength ? maxlength : 255}}"
         name="{{id}}"
         ng-model="model"
-        ui-mask="{{mask}}"
+        ui-mask="mask"
         ng-disabled="disabled"
         ng-required="obrigatorio"
         placeholder="{{placeholder}}"

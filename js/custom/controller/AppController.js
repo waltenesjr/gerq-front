@@ -38,10 +38,7 @@ angular.module('app').controller('AppController', ['$scope', '$timeout', '$trans
          * Metodo para mostrar mensagem de campos invalidos
          */
         $scope.showMessageErrorCampoInvalido = function (campo) {
-            var message = campo;
-            message += " ".concat($translate.instant('VALIDACAO.MENSAGEM_M004'))
-                .concat($translate.instant('VALIDACAO.MENSAGEM_M004_PROCEDIMENTO')).concat(campo)
-                .concat($translate.instant('VALIDACAO.MENSAGEM_M004_CAMPOS'));
+            var message = campo + " ".concat($translate.instant('VALIDACAO.MENSAGEM_M004'));
             if (message && message !== "") {
                 $scope.showMessage('error', message);
             } else {

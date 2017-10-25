@@ -8,7 +8,7 @@
             <form>
                 <div class="form-group form-group-lg">
                     <div class="input-group">
-                        <input focus-me="focuPesquisa" placeholder="{{'LABEL.PESQUISAR' | translate}}" ng-model="fields[0].value" class="form-control" id="descricao" name="descricao">
+                        <input focus-me="focuPesquisa" placeholder="{{'LABEL.BUSCAR' | translate}}" ng-model="pagination.fields[0].value" class="form-control" id="descricao" name="descricao">
                         <span class="input-group-btn">
                             <button type="submit" ng-click="getList()" class="btn btn-primary btn-lg">
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -49,7 +49,7 @@
                     </tr>
                 </tbody>
             </table>
-            <dir-pagination-controls ng-if="pagination.list.length > 0" max-size="5" boundary-links="true" on-page-change="getList()"></dir-pagination-controls>
+            <dir-pagination-controls ng-if="pagination.list.length > 0" boundary-links="true" on-page-change="getList()"></dir-pagination-controls>
             <hr>
             <div class="text-right">
                 <a ng-click="add()" class="btn btn-primary btn-lg">
@@ -61,7 +61,7 @@
         <div ng-if="status == 'edit' || status == 'detail'" class="form-group form-group-lg">
             <form name="produtoForm" novalidate autocomplete="off">
                 <ul class="nav nav-tabs">
-                    <li role="presentation" class="active"><a href="#identificacao" aria-controls="identificacao" role="tab" data-toggle="tab">Identificação</a></li>
+                    <li role="presentation" class="active"><a href="#identificacao" aria-controls="identificacao" role="tab" data-toggle="tab">{{'PRODUTO.IDENTIFICACAO' | translate}}</a></li>
                     <li role="presentation"><a href="#perigo" aria-controls="perigo" role="tab" data-toggle="tab">{{'PERIGO.PERIGO' | translate}}</a></li>
                 </ul><br>
 
@@ -110,19 +110,21 @@
                     </div>
 
                     <div role="tabpanel" class="tab-pane fade" id="perigo">
-                        <div class="form-group">
-                            <label-input ng-if="status == 'edit'" form="perigoForm" ng-model="perigo.titulo" ng-obrigatorio="true" name="inputPerTitle" id="inputPerTitle" ng-label="PERIGO.TITULO"></label-input>
+                        <div class="form-group" ng-class="{'has-error': hasError.tituloPerigo}">
+                            <label class="label-required" ng-class="{'label-campo-obrigatorio': hasError.tituloPerigo}">{{'PERIGO.TITULO' | translate}}</label>
+                            <input ng-model="perigo.titulo" class="form-control" id="titulo" name="titulo">
                         </div>
-                        <div class="form-group">
-                            <label-input ng-if="status == 'edit'" form="perigoForm" ng-model="perigo.descricao" ng-obrigatorio="true" name="inputPerDesc" id="inputPerDesc" ng-label="PERIGO.DESCRICAO"></label-input>
+                        <div class="form-group" ng-class="{'has-error': hasError.descricaoPerigo}">
+                            <label class="label-required" ng-class="{'label-campo-obrigatorio': hasError.descricaoPerigo}">{{'PERIGO.DESCRICAO' | translate}}</label>
+                            <input ng-model="perigo.descricao" class="form-control" id="descricao" name="descricao">
                         </div>
-                        <div style="text-align: right;">
+                        <div class="text-right">
                             <hr>
-                            <button ng-click="addPerigo()" class="btn btn-primary btn-lg">
+                            <a ng-click="addPerigo()" class="btn btn-primary btn-lg">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {{'LABEL.ADICIONAR' | translate}}
-                            </button>
+                            </a>
                         </div><br>
-                        <table ng-show="perigos.length > 0" class="table table-bordered table-hover">
+                        <table ng-show="produto.perigos.length > 0" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>{{'PERIGO.TITULO' | translate}}</th>
@@ -131,11 +133,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr dir-paginate="perigo in perigos|itemsPerPage:pagination.limit">
-                                    <td width="30%">{{ perigo.titulo }}</td>
-                                    <td>{{ perigo.descricao }}</td>
+                                <tr dir-paginate="p in produto.perigos|itemsPerPage:pagination.limit">
+                                    <td width="30%">{{ p.titulo }}</td>
+                                    <td>{{ p.descricao }}</td>
                                     <td width="10%" class="text-center">
-                                        <button class="btn btn-primary">
+                                        <button ng-click="perigo = p" class="btn btn-primary">
                                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                         </button>
                                         <button class="btn btn-primary" ng-click="removePerigo($index)">
@@ -145,7 +147,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <dir-pagination-controls on-page-change="getList()" boundary-links="true"></dir-pagination-controls>
+                        <dir-pagination-controls ng-if="produto.perigos.length > 0" boundary-links="true"></dir-pagination-controls>
                     </div>
                 </div>
                 <hr>

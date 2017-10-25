@@ -101,3 +101,12 @@ hr {
     color: white;
 }
 
+label.label-required::before {
+    content: "* ";
+    color: red;
+}
+
+.red {
+    color: red;
+}
+

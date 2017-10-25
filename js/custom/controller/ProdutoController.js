@@ -1,10 +1,8 @@
 'use strict';
-gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService', '$timeout',
-    function ($scope, $translate, ProdutoService, $timeout) {
+gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService',
+    function ($scope, $translate, ProdutoService) {
 
         $scope.getList = function () {
-            $scope.pagination.sort = angular.copy($scope.sort);
-            $scope.pagination.fields = angular.copy($scope.fields);
             $scope.pagination.list = null;
             ProdutoService.list($scope.pagination).then(function (response) {
                 $scope.pagination = response.plain();
@@ -14,29 +12,28 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         };
 
         $scope.onSort = function (position, field) {
-            $scope.sort.field = field;
+            $scope.pagination.sort.field = field;
             if (!$scope.orders[position].direction) {
                 $scope.orders[position].direction = 'desc';
-                $scope.sort.direction = 'desc';
+                $scope.pagination.sort.direction = 'desc';
                 $scope.getList();
                 return;
             }
             if ($scope.orders[position].direction === 'asc') {
                 $scope.orders[position].direction = 'desc';
-                $scope.sort.direction = 'desc';
+                $scope.pagination.sort.direction = 'desc';
                 $scope.getList();
                 return;
             }
             if ($scope.orders[position].direction === 'desc') {
                 $scope.orders[position].direction = 'asc';
-                $scope.sort.direction = 'asc';
+                $scope.pagination.sort.direction = 'asc';
                 $scope.getList();
             }
         };
 
         $scope.save = function () {
-            $scope.produto.perigos = $scope.perigos;
-            var tab = ProdutoService.validRequired($scope.produto);
+            var tab = ProdutoService.validationRequired($scope.produto);
             if (null == tab) {
                 ProdutoService.save($scope.produto).then(function () {
                     sucess();
@@ -44,18 +41,12 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
                     error(response);
                 });
             } else {
-                $scope.setTab(tab);
-                if (tab == 'identificacao') {
-                    $scope.showMessageObrigatoriedade();
-                } else if (tab == 'perigo') {
-                    $scope.showMessageError('Adicione pelo menos um perigo.')
-                }
-
+                messageValidation(tab);
             }
         }
 
         $scope.setTab = function (tab) {
-            activaTab(tab);
+            activeTab(tab);
         }
 
         $scope.edit = function (id) {
@@ -72,21 +63,23 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
             initEdit();
             $scope.produto = {
                 categoria: {},
-                empresa: {}
+                empresa: {},
+                perigos: []
             };
         }
 
         $scope.addPerigo = function () {
-            if ($scope.perigo.titulo || $scope.perigo.descricao) {
-                $scope.perigos.push($scope.perigo);
+            if (validationRequeridPerigo($scope.perigo)) {
+                $scope.produto.perigos.push($scope.perigo);
                 $scope.perigo = {};
+                $scope.hasError = {};
             } else {
                 $scope.showMessageObrigatoriedade();
             }
         }
 
         $scope.removePerigo = function (index) {
-            $scope.perigos.splice(index, 1);
+            $scope.produto.perigos.splice(index, 1);
         }
 
         $scope.remove = function (id) {
@@ -109,15 +102,13 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
             $scope.pagination = {
                 currentPage: 1,
                 totalResults: 0,
-                limit: 5
+                limit: 5,
+                fields: [ {name: 'nome', value: null} ],
+                sort: {}
             };
-            $scope.fields = [
-                {name: 'nome', value: null}
-            ];
             $scope.orders = [
                 {direction: null}
             ];
-            $scope.sort = {};
             $scope.focuPesquisa = true;
             $scope.status = 'list';
             $scope.getList();
@@ -128,16 +119,15 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
         function initEdit() {
             allCategorias();
             allEmpresas();
-            $scope.perigos = [];
             $scope.perigo = {};
             $scope.status = 'edit';
             $scope.focuEdit = true;
+            $scope.hasError = {};
         }
 
         function get(id) {
             ProdutoService.get(id).then(function (response) {
                 $scope.produto = response.plain();
-                $scope.perigos = $scope.produto.perigos;
             }, function errorCallback(response) {
                 error(response);
             });
@@ -157,6 +147,28 @@ gerqApp.controller('ProdutoController',['$scope', '$translate', 'ProdutoService'
             }, function errorCallback(response) {
                 error(response);
             });
+        }
+
+        function validationRequeridPerigo(perigo) {
+            var result = true;
+            if (!perigo.titulo) {
+                $scope.hasError.tituloPerigo = true;
+                result = false;
+            }
+            if (!perigo.descricao) {
+                $scope.hasError.descricaoPerigo = true;
+                result = false;
+            }
+            return result;
+        }
+
+        function messageValidation(tab) {
+            if (tab == 'identificacao') {
+                $scope.showMessageObrigatoriedade();
+            } else if (tab == 'perigo') {
+                $scope.showMessageError('Adicione pelo menos um perigo.')
+            }
+            $scope.setTab(tab);
         }
 
         function sucess() {

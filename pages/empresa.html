@@ -3,10 +3,10 @@
         <h2 class="panel-title"><strong>{{'EMPRESA.EMPRESAS' | translate}}</strong></h2>
     </div>
     <div class="panel-body">
-        <form name="empresaForm">
+        <form name="empresaForm" novalidate autocomplete="off">
             <div class="form-group form-group-lg">
                 <div class="input-group" ng-if="status == 'list'">
-                    <input placeholder="{{'LABEL.PESQUISAR' | translate}}" ng-model="fields[0].value" class="form-control" id="empresa" name="empresa">
+                    <input focus-me="focuPesquisa" placeholder="{{'LABEL.BUSCAR' | translate}}" ng-model="fields[0].value" class="form-control" id="empresa" name="empresa">
                     <span class="input-group-btn">
                         <button ng-if="status == 'list'" ng-click="getList()" class="btn btn-primary btn-lg">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -15,37 +15,32 @@
                 </div>
                 <div ng-if="status == 'edit'">
                     <div class="form-group">
-                        <label>{{'EMPRESA.NOME' | translate}}</label>
-                        <input ng-model="empresa.nome" class="form-control" id="nome" name="nome">
+                        <label-input form="empresaForm" ng-focus-on="focuEdit" ng-model="empresa.nome" ng-obrigatorio="true" name="nomeEmp" id="nomeEmp" ng-label="EMPRESA.NOME"></label-input>
                     </div>
                     <div class="form-group">
-                        <label>{{'EMPRESA.AREA' | translate}}</label>
-                        <input ng-model="empresa.area" class="form-control" id="area" name="area">
+                        <label-input form="empresaForm" ng-model="empresa.area" ng-obrigatorio="true" name="areaEmp" id="areaEmp" ng-label="EMPRESA.AREA"></label-input>
                     </div>
                     <div class="form-group">
-                        <label>{{'EMPRESA.ENDERECO' | translate}}</label>
-                        <input ng-model="empresa.endereco" class="form-control" id="endereco" name="endereco">
+                        <label-input form="empresaForm" ng-model="empresa.endereco" ng-obrigatorio="true" name="endeEmp" id="endeEmp" ng-label="EMPRESA.ENDERECO"></label-input>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>{{'EMPRESA.TELEFONE' | translate}}</label>
-                            <input ui-br-phone-number ng-model="empresa.telefone" class="form-control" id="telefone" name="telefone">
+                    <div class="row form-group">
+                        <div class="col-md-4" ng-class="{'has-error': (empresaForm.telefone.$error.required || empresaForm.telefone.$error.regexValidate) && (!empresaForm.telefone.$pristine || empresaForm.$submitted)}">
+                            <label class="label-required" ng-class="{'label-campo-obrigatorio': (empresaForm.telefone.$error.required || empresaForm.telefone.$error.regexValidate) && (!empresaForm.telefone.$pristine || empresaForm.$submitted)}">{{'EMPRESA.TELEFONE' | translate}}</label>
+                            <input ui-br-phone-number placeholder="{{'EMPRESA.TELEFONE' | translate}}" ng-model="empresa.telefone" class="form-control" id="telefone" name="telefone" required>
+                        </div>
+                        <div class="col-md-4" ng-class="{'has-error': (empresaForm.telefone1.$error.required || empresaForm.telefone1.$error.regexValidate) && (!empresaForm.telefone1.$pristine || empresaForm.$submitted)}">
+                            <label class="label-required" ng-class="{'label-campo-obrigatorio': (empresaForm.telefone1.$error.required || empresaForm.telefone1.$error.regexValidate) && (!empresaForm.telefone1.$pristine || empresaForm.$submitted)}">{{'EMPRESA.TELEFONE' | translate}}</label>
+                            <input ui-br-phone-number placeholder="{{'EMPRESA.TELEFONE' | translate}}" ng-model="empresa.telefoneAux" class="form-control" id="telefone1" name="telefone1" required>
                         </div>
                         <div class="col-md-4">
-                            <label>{{'EMPRESA.TELEFONE' | translate}}</label>
-                            <input ui-br-phone-number ng-model="empresa.telefoneAux" class="form-control" id="telefone1" name="telefone1">
-                        </div>
-                        <div class="col-md-4">
-                            <label>{{'EMPRESA.EMAIL' | translate}}</label>
-                            <input ng-model="empresa.email" class="form-control" id="email" name="email">
+                            <label-input ng-type="email" form="empresaForm" ng-model="empresa.email" ng-obrigatorio="true" name="emailEmp" id="emailEmp" ng-label="EMPRESA.EMAIL"></label-input>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>{{'EMPRESA.EMERGENCIA' | translate}}</label>
-                        <input ng-model="empresa.contatoEmergencia" class="form-control" id="nome" name="nome">
+                        <label-input form="empresaForm" ng-model="empresa.contatoEmergencia" ng-obrigatorio="true" name="contEmerEmp" id="contEmerEmp" ng-label="EMPRESA.EMERGENCIA"></label-input>
                     </div>
                     <hr>
-                    <div style="text-align: right;">
+                    <div class="text-right">
                         <button ng-click="save()" class="btn btn-primary btn-lg">
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{'LABEL.SALVAR' | translate}}
                         </button>
@@ -86,7 +81,7 @@
             </table>
             <dir-pagination-controls on-page-change="getList()" boundary-links="true"></dir-pagination-controls>
         </div>
-        <div style="text-align: right;" ng-if="status == 'list'">
+        <div class="text-right" ng-if="status == 'list'">
             <hr>
             <button ng-click="add()" class="btn btn-primary btn-lg">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><strong> {{'LABEL.NOVO' | translate}}</strong>

@@ -15,6 +15,7 @@ angular.module('app').directive('labelInputDate', ['$translate', function ($tran
             eventoChange: "&ngEventoChange",
             format: "@ngFormat",
             form: "=form",
+            placeholder: '@',
             labelAlertTooltip: '@',
             labelInfoTooltip: '@',
             labelQuestionTooltip: '@',
@@ -32,6 +33,18 @@ angular.module('app').directive('labelInputDate', ['$translate', function ($tran
 
             if (!$scope.mode) {
                 $scope.mode = "day";
+            }
+
+            // Define um placeholder para o item caso ele não seja definido
+            if($scope.placeholder === undefined && $scope.disabled !== true) {
+
+                if($scope.label !== undefined) {
+
+                    $scope.placeholder = $translate.instant($scope.label);
+                } else {
+
+                    $scope.placeholder = '';
+                }
             }
 
             $scope.datePickerFormat = $scope.format ? $scope.format : 'dd/MM/yyyy';
