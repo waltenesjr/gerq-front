@@ -46,5 +46,12 @@
 		"PERIGO": "Perigo",
 		"TITULO": "Título",
 		"DESCRICAO": "Descrição"
+	},
+
+	"EMERGENCIA": {
+		"EMERGENCIAS": "Emergências",
+		"EMERGENCIA": "Emergência",
+		"TITULO": "Título",
+		"DESCRICAO": "Descrição"
 	}
 }
